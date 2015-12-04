@@ -1,4 +1,4 @@
-package com.gmail.edenthink.util;
+package com.gmail.edenthink.tools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
