@@ -1,3 +1,5 @@
+package com.gmail.edenthink;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
