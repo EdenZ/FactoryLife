@@ -1,24 +1,31 @@
 package com.gmail.edenthink.order;
 
+import com.gmail.edenthink.FactoryLife;
 import org.bukkit.entity.Player;
 
 /**
- * Created by Eden on 2015/12/5.
+ * The controlling class for order system
  */
 public class Controller {
-    public static void createNewOrder(Player player) {
+    private final FactoryLife plugin;
+
+    public Controller(FactoryLife plugin) {
+        this.plugin = plugin;
+    }
+
+    public void createNewOrder(Player player) {
         // TODO: 2015/12/5  Create new order every day
     }
 
-    public static void cleanOrder() {
+    public void cleanOrder() {
         // TODO: 2015/12/5  Clean up all expired orders,and create new orders for those who currently online
     }
 
-    public static void processOrder(Player player) {
+    public void processOrder(Player player) {
         // TODO: 2015/12/5  if user success to complete the order, reward user, else tell user failed
     }
 
-    public static void joinPlayerOrderCheck(Player player) {
+    public void joinPlayerOrderCheck(Player player) {
         // TODO: 2015/12/5 Check the player's order, if none, create new orders
     }
 }
