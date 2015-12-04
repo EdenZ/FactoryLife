@@ -2,3 +2,4 @@ name: FactoryLife
 version: 0.1
 author: Eden
 main: com.gmail.edenthink.FactoryLife
+softdepend: [vault]
