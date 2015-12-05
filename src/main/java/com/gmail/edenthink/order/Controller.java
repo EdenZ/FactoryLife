@@ -3,7 +3,9 @@ package com.gmail.edenthink.order;
 import com.gmail.edenthink.FactoryLife;
 import com.gmail.edenthink.tools.Util;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -36,7 +38,6 @@ public class Controller implements Listener{
 
     @SuppressWarnings("deprecation")
     public void processOrder(Player player, int orderNo) {
-        // TODO: 2015/12/5  if user success to complete the order, reward user, else tell user failed
         if (orderNo == 1) {
             processStep(player, manager.ORDER_ONE, new ItemStack[]{new ItemStack(42, 5), new ItemStack(190, 5), new ItemStack(190, 5, (short) 1)}, 70);
         } else if (orderNo == 2) {
@@ -61,7 +62,8 @@ public class Controller implements Listener{
         }
     }
 
-    public void joinPlayerOrderCheck(Player player) {
-        // TODO: 2015/12/5 Check the player's order, if none, create new orders
+    @EventHandler
+    public void joinPlayerOrderCheck(PlayerJoinEvent event) {
+        manager.insertNewOrder(event.getPlayer().getName());
     }
 }
