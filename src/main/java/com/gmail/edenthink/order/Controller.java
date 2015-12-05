@@ -9,17 +9,30 @@ import org.bukkit.event.Listener;
  */
 public class Controller implements Listener{
     private final FactoryLife plugin;
+    private final FactoryOrderManager manager;
 
     public Controller(FactoryLife plugin) {
         this.plugin = plugin;
+        manager = new FactoryOrderManager();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    /**
+     * Reset for one player
+     * @param player who
+     */
     public void resetOrder(String player) {
         // TODO: 2015/12/5
     }
 
-    public void processOrder(Player player) {
+    /**
+     * Reset for all player
+     */
+    public void resetOrder() {
+        manager.resetOrderTimes();
+    }
+
+    public void processOrder(Player player, int orderNo) {
         // TODO: 2015/12/5  if user success to complete the order, reward user, else tell user failed
     }
 
