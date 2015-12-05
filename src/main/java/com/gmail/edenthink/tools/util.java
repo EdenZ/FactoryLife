@@ -9,14 +9,16 @@ import org.bukkit.inventory.ItemStack;
 public class util {
     /**
      * Remove items from inventory
+     *
      * @param inventory Where
      * @param id        What
+     * @param data      Meta
      * @param amount    How much
      */
     @SuppressWarnings("deprecation")
-    public static void removeItems(Inventory inventory, int id, int amount) {
+    public static void removeItems(Inventory inventory, int id, int data, int amount) {
         for (ItemStack is : inventory.getContents()) {
-            if (is != null && is.getTypeId() == id) {
+            if (is != null && is.getTypeId() == id && is.getData().getData() == data) {
                 int newAmount = is.getAmount() - amount;
                 if (newAmount > 0) {
                     is.setAmount(newAmount);
@@ -28,5 +30,28 @@ public class util {
                 }
             }
         }
+    }
+
+    /**
+     * Check inventory contains enough items
+     * @param inventory where
+     * @param id        what
+     * @param data      data
+     * @param amount    how much
+     * @return whether or not this inventory has enough items
+     */
+    public static boolean checkItem(Inventory inventory, int id, int data, int amount) {
+        for (ItemStack is : inventory.getContents()) {
+            if (is != null && is.getTypeId() == id && is.getData().getData() == data) {
+                int newAmount = is.getAmount() - amount;
+                if (newAmount > 0) {
+                    return true;
+                } else {
+                    amount = -newAmount;
+                    if (amount == 0) return true;
+                }
+            }
+        }
+        return amount == 0;
     }
 }

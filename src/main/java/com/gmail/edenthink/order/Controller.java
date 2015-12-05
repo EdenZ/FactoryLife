@@ -14,7 +14,7 @@ public class Controller {
     }
 
     public void createNewOrder(Player player) {
-        // TODO: 2015/12/5  Create new order every day
+        // TODO: 2015/12/5  Create new daily orders
     }
 
     public void cleanOrder() {
