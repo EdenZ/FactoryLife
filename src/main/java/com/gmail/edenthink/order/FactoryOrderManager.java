@@ -1,11 +1,16 @@
 package com.gmail.edenthink.order;
 
-import com.gmail.edenthink.tools.SQLManager;
+import com.gmail.edenthink.tools.Driver;
+import com.gmail.edenthink.tools.Util;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Controlling table
  */
-public class FactoryOrderManager extends SQLManager {
+public class FactoryOrderManager {
     final String PLAYER = "player";
     final String TABLE = "factory_order";
     final String ORDER_ONE = "order_one";
@@ -13,23 +18,63 @@ public class FactoryOrderManager extends SQLManager {
     final String ORDER_THREE = "order_three";
 
     public void insertNewOrder(String player) {
-        // TODO: 2015/12/5
         String sql = String.format("INSERT INTO %s (%s) VALUES (\"%s\");", TABLE, PLAYER, player);
-        executeSQL(sql);
+        try (Statement statement = Driver.getConnection().createStatement()){
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.err.print(Util.printSQLError(e));
+        }
     }
 
-    public boolean orderTimesReduce(String player, int orderNo) {
-        // TODO: 2015/12/5
-        return false;
+    public boolean orderTimesReduce(String player, String orderNo) {
+        int current = getRemain(player, orderNo);
+        if (current < 1) return false;
+        String sql = String.format("UPDATE %s SET %s = %d WHERE %s = \"%s\";", TABLE, orderNo, current - 1, PLAYER, player);
+        try (Statement statement = Driver.getConnection().createStatement()){
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.err.print(Util.printSQLError(e));
+        }
+        return true;
     }
 
-    public int getRemain(String player, int orderNo) {
-        // TODO: 2015/12/5
-        return 0;
+    /**
+     *
+     * @param player who
+     * @param orderNo what
+     * @return number
+     */
+    public int getRemain(String player, String orderNo) {
+        int num = 0;
+        ResultSet set = null;
+        String sql = String.format("SELECT %s FROM %s WHERE %s = \"%s\"", orderNo, TABLE, PLAYER, player);
+        try (Statement statement = Driver.getConnection().createStatement()){
+            set = statement.executeQuery(sql);
+            if (set.next()) {
+                num = set.getInt(orderNo);
+            }
+        } catch (SQLException e) {
+            System.err.print(Util.printSQLError(e));
+        }
+        finally {
+            if (set != null) {
+                try {
+                    set.close();
+                } catch (SQLException e) {
+                    System.err.print(Util.printSQLError(e));
+                }
+            }
+        }
+        return num;
     }
 
     public void resetOrderTimes() {
-        // TODO: 2015/12/5
+        String sql = String.format("UPDATE %s SET %s = 3, %s = 3, %s = 3", TABLE, ORDER_ONE, ORDER_TWO, ORDER_THREE);
+        try (Statement statement = Driver.getConnection().createStatement()){
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.err.print(Util.printSQLError(e));
+        }
     }
 
     public void resetOrderTimes(String player) {

@@ -3,10 +3,12 @@ package com.gmail.edenthink.tools;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.sql.SQLException;
+
 /**
  * Created by Eden on 2015/12/5.
  */
-public class util {
+public class Util {
     /**
      * Remove items from inventory
      *
@@ -53,5 +55,9 @@ public class util {
             }
         }
         return amount == 0;
+    }
+
+    public static String printSQLError(SQLException e) {
+        return String.format("SQL message(%3d): %s", e.getErrorCode(), e.getMessage());
     }
 }
