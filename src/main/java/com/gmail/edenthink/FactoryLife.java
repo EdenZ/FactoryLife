@@ -1,5 +1,6 @@
 package com.gmail.edenthink;
 
+import com.gmail.edenthink.order.Controller;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -16,6 +17,27 @@ public class FactoryLife extends JavaPlugin {
     public static Economy econ = null;
     public static Permission perms = null;
     public static Chat chat = null;
+    private Controller orderControl;
+
+    public Controller getOrderControl() {
+        return orderControl;
+    }
+
+    public static Economy getEcon() {
+        return econ;
+    }
+
+    public static Permission getPerms() {
+        return perms;
+    }
+
+    public static Chat getChat() {
+        return chat;
+    }
+
+    public static Logger getLog() {
+        return log;
+    }
 
     @Override
     public void onDisable() {
@@ -31,6 +53,7 @@ public class FactoryLife extends JavaPlugin {
         }
         setupPermissions();
         setupChat();
+        orderControl = new Controller(this);
     }
 
     private boolean setupEconomy() {

@@ -1,32 +1,26 @@
 package com.gmail.edenthink.order;
 
 import com.gmail.edenthink.tools.SQLManager;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * Controlling table
  */
 public class FactoryOrderManager extends SQLManager {
-    public void insertNewOrder(String player, int type, double reward, ItemStack[] itemStacks) {
+    public void insertNewOrder(String player, int type) {
         // TODO: 2015/12/5
     }
 
-    public void cleanUpOrder() {
+    public boolean orderTimesReduce(String player, int type) {
         // TODO: 2015/12/5
+        return false;
     }
 
-    public ItemStack[] getItems(String player, int type) {
-        ItemStack[] items = new ItemStack[0];
-        // TODO: 2015/12/5
-        return items;
-    }
-
-    public double getReward(String player, int type) {
+    public int getRemain(String player, int type) {
         // TODO: 2015/12/5
         return 0;
     }
 
-    public void setDone(String player, int type, boolean done) {
-        //// TODO: 2015/12/5
+    public void resetOrderTimes() {
+        // TODO: 2015/12/5
     }
 }

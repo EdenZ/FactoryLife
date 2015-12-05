@@ -2,23 +2,21 @@ package com.gmail.edenthink.order;
 
 import com.gmail.edenthink.FactoryLife;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
 /**
  * The controlling class for order system
  */
-public class Controller {
+public class Controller implements Listener{
     private final FactoryLife plugin;
 
     public Controller(FactoryLife plugin) {
         this.plugin = plugin;
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    public void createNewOrder(Player player) {
-        // TODO: 2015/12/5  Create new daily orders
-    }
-
-    public void cleanOrder() {
-        // TODO: 2015/12/5  Clean up all expired orders,and create new orders for those who currently online
+    public void resetOrder(String player) {
+        // TODO: 2015/12/5
     }
 
     public void processOrder(Player player) {
