@@ -19,14 +19,7 @@ public class Controller implements Listener{
         this.plugin = plugin;
         manager = new FactoryOrderManager();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-    }
-
-    /**
-     * Reset for one player
-     * @param player who
-     */
-    public void resetOrder(String player) {
-        // TODO: 2015/12/5
+        plugin.getCommand("order").setExecutor(new OrderCommand(this));
     }
 
     /**

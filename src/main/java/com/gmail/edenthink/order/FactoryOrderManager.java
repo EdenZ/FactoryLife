@@ -76,8 +76,4 @@ public class FactoryOrderManager {
             System.err.print(Util.printSQLError(e));
         }
     }
-
-    public void resetOrderTimes(String player) {
-        // TODO: 2015/12/5
-    }
 }
