@@ -28,6 +28,10 @@ public class OrderController implements Listener{
         return plugin;
     }
 
+    public FactoryOrderManager getManager() {
+        return manager;
+    }
+
     /**
      * Reset for all player
      */

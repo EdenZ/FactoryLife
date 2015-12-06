@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Created by Eden on 2015/12/6.
+ * /order Command
  */
 public class OrderCommand implements CommandExecutor {
     private final OrderController orderController;
@@ -22,8 +22,12 @@ public class OrderCommand implements CommandExecutor {
             if (strings.length != 1) return false;
             //order info
             if (strings[0].equalsIgnoreCase("info")) {
-                // TODO: 2015/12/6 Show the state of orders
+                int one = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_ONE);
+                int two = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_TWO);
+                int three = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_THREE);
+                commandSender.sendMessage(String.format("Order one: %d%nOrder two: %d%nOrder three: %d", one, two, three));
                 return true;
+                //order one
             } else if (strings[0].equalsIgnoreCase("one")) {
                 orderController.processOrder((Player) commandSender, 1);
                 commandSender.sendMessage("Order completed");

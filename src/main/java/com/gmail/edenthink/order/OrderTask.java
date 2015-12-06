@@ -3,7 +3,7 @@ package com.gmail.edenthink.order;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
- * Created by Eden on 2015/12/6.
+ * Task manager
  */
 public class OrderTask {
     private OrderController orderController;
