@@ -18,6 +18,7 @@ public class FactoryLife extends JavaPlugin {
     public static Permission perms = null;
     public static Chat chat = null;
     private OrderController orderControl;
+    public static final boolean DEBUG = false;
 
     public OrderController getOrderControl() {
         return orderControl;

@@ -52,10 +52,16 @@ public class OrderController implements Listener{
             if (!Util.checkItem(player.getInventory(), item.getTypeId(), item.getDurability(), item.getAmount())) {
                 return;
             }
+            if (FactoryLife.DEBUG) {
+                plugin.getLogger().info("Item checked");
+            }
         }
         if (manager.orderTimesReduce(player.getName(), orderType)) {
             for (ItemStack item : items) {
                 Util.removeItems(player.getInventory(), item.getTypeId(), item.getDurability(), item.getAmount());
+            }
+            if (FactoryLife.DEBUG) {
+                plugin.getLogger().info("Item removed");
             }
             FactoryLife.getEcon().depositPlayer(player, reward);
         }
