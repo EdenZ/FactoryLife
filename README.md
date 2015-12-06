@@ -11,6 +11,8 @@
     - three
 * The limit will be reset every 24h.
 * Fix the reset time to 6 am(TODO)
+* Random reward(TODO)
+* More orders(TODO)
 
 ## Ticket ##
 Coming soon...
