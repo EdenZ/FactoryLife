@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
  * Created by Eden on 2015/12/6.
  */
 public class OrderCommand implements CommandExecutor {
-    private final Controller controller;
+    private final OrderController orderController;
 
-    public OrderCommand(Controller controller) {
-        this.controller = controller;
+    public OrderCommand(OrderController orderController) {
+        this.orderController = orderController;
     }
 
     @Override
@@ -25,15 +25,15 @@ public class OrderCommand implements CommandExecutor {
                 // TODO: 2015/12/6 Show the state of orders
                 return true;
             } else if (strings[0].equalsIgnoreCase("one")) {
-                controller.processOrder((Player) commandSender, 1);
+                orderController.processOrder((Player) commandSender, 1);
                 commandSender.sendMessage("Order completed");
                 return true;
             } else if (strings[0].equalsIgnoreCase("two")) {
-                controller.processOrder((Player) commandSender, 2);
+                orderController.processOrder((Player) commandSender, 2);
                 commandSender.sendMessage("Order completed");
                 return true;
             } else if (strings[0].equalsIgnoreCase("three")) {
-                controller.processOrder((Player) commandSender, 2);
+                orderController.processOrder((Player) commandSender, 2);
                 commandSender.sendMessage("Order completed");
                 return true;
             }

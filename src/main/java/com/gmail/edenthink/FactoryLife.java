@@ -1,6 +1,6 @@
 package com.gmail.edenthink;
 
-import com.gmail.edenthink.order.Controller;
+import com.gmail.edenthink.order.OrderController;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -17,9 +17,9 @@ public class FactoryLife extends JavaPlugin {
     public static Economy econ = null;
     public static Permission perms = null;
     public static Chat chat = null;
-    private Controller orderControl;
+    private OrderController orderControl;
 
-    public Controller getOrderControl() {
+    public OrderController getOrderControl() {
         return orderControl;
     }
 
@@ -55,7 +55,7 @@ public class FactoryLife extends JavaPlugin {
         setupChat();
         saveDefaultConfig();
         saveResource("Storage.db", false);
-        orderControl = new Controller(this);
+        orderControl = new OrderController(this);
     }
 
     private boolean setupEconomy() {

@@ -11,15 +11,21 @@ import org.bukkit.inventory.ItemStack;
 /**
  * The controlling class for order system
  */
-public class Controller implements Listener{
+public class OrderController implements Listener{
     private final FactoryLife plugin;
     private final FactoryOrderManager manager;
+    private final OrderTask orderTask;
 
-    public Controller(FactoryLife plugin) {
+    public OrderController(FactoryLife plugin) {
         this.plugin = plugin;
         manager = new FactoryOrderManager();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.getCommand("order").setExecutor(new OrderCommand(this));
+        orderTask = new OrderTask(this);
+    }
+
+    public FactoryLife getPlugin() {
+        return plugin;
     }
 
     /**
