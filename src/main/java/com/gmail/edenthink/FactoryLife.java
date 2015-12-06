@@ -53,6 +53,8 @@ public class FactoryLife extends JavaPlugin {
         }
         setupPermissions();
         setupChat();
+        saveDefaultConfig();
+        saveResource("Storage.db", false);
         orderControl = new Controller(this);
     }
 

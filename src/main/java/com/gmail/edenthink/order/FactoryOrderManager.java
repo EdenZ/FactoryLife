@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Controlling table
+ * Controlling database
  */
 public class FactoryOrderManager {
     final String PLAYER = "player";
