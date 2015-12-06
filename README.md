@@ -3,9 +3,9 @@
 ## Order ##
 * Player has three orders for each day.
 * Each order can be completed three times per day.
-* The limit will be reset at 6am.//TODO
 * Finishing order will get finance reward.
-* Command /order//TODO
+* Command /order info(TODO)
+* The limit will be reset every 24h.(TODO)
 
 ## Ticket ##
 Coming soon...
