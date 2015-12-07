@@ -24,6 +24,7 @@ public class TicketController implements Listener {
     public TicketController(FactoryLife plugin) {
         this.plugin = plugin;
         data = new TicketData();
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.getCommand("ticket").setExecutor(new TicketCommand(this));
     }
 
@@ -67,9 +68,13 @@ public class TicketController implements Listener {
      * The main function of ticket
      * @param event event
      */
+    @SuppressWarnings("deprecation")
     @EventHandler
     public void ticketFunction(BlockBreakEvent event) {
         if (event.isCancelled()) {
+            return;
+        }
+        if (!ORE_ID.contains(event.getBlock().getTypeId())) {
             return;
         }
         String name = event.getPlayer().getName();

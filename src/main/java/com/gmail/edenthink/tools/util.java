@@ -1,5 +1,7 @@
 package com.gmail.edenthink.tools;
 
+import com.gmail.edenthink.FactoryLife;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -58,7 +60,22 @@ public class Util {
         return amount == 0;
     }
 
+    /**
+     * Print error
+     * @param e exception
+     * @return error format
+     */
     public static String printSQLError(SQLException e) {
         return String.format("SQL message(%3d): %s", e.getErrorCode(), e.getMessage());
+    }
+
+    /**
+     * Withdraw amount money from player
+     * @param player who
+     * @param amount how much
+     * @return success or not
+     */
+    public static boolean withdraw(Player player, int amount) {
+        return FactoryLife.getEcon().withdrawPlayer(player, amount).transactionSuccess();
     }
 }
