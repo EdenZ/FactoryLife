@@ -1,28 +1,33 @@
 # This is a note for developers #
 
 ## Order ##
-* __Player has three orders for each day.__
-* __Each order can be completed three times per day.__
-* __Finishing order will get financial reward.__
-* __Command /order__
+- [x] __Player has three orders for each day.__
+- [x] __Each order can be completed three times per day.__
+- [x] Finishing order will get financial reward.
+- [x] Command /order
     - info
     - one
     - two
     - three
-* __The limit will be reset every 24h.__
-* _Fix the reset time to 6 am_
-* _Random reward_
-* _Random orders_
-    - _Random items and amount_
-    - _Random time_
+- [x] The limit will be reset every 24h.
+- [ ] Fix the reset time to 6 am
+- [ ] Random reward
+- [ ] Random orders
+    - Random items and amount
+    - Random time
 
 ## Ticket ##
-* _Player will get double resource while they hold ticket_
-* _Also, this action will consume one ticket_
-* _Coming soon_
+* [ ] __Player will get double resource while they hold ticket__
+* [ ] __Also, this action will consume one ticket__
+* [ ] Stopping plauer places ore block
+* [ ] Command /ticket
+    - info
+    - buy 20
+    - buy 30
+    - buy 50
 
 ##GeneratorCost##
-* __Placing generators will need to pay a fee__
+* [x] Placing generators will need to pay a fee
     - normal:   30
     - Geo:      50
     - Nuclear:  300
