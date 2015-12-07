@@ -17,9 +17,9 @@
     - Random time
 
 ## Ticket ##
-* [ ] __Player will get double resource while they hold ticket__
-* [ ] __Also, this action will consume one ticket__
-* [ ] Stopping plauer places ore block
+* [x] __Player will get double resource while they hold ticket__
+* [x] __Also, this action will consume one ticket__
+* [x] Stopping plauer places ore block
 * [ ] Command /ticket
     - info
     - buy 20
