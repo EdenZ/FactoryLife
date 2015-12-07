@@ -20,7 +20,9 @@ public class TicketData {
         try (Statement statement = Driver.getConnection().createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            Util.printSQLError(e);
+            if (e.getErrorCode() != 0) {
+                System.err.print(Util.printSQLError(e));
+            }
         }
     }
 
@@ -34,7 +36,7 @@ public class TicketData {
                 }
             }
         } catch (SQLException e) {
-            Util.printSQLError(e);
+            System.err.print(Util.printSQLError(e));
         }
         return num;
     }
@@ -44,7 +46,7 @@ public class TicketData {
         try (Statement statement = Driver.getConnection().createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            Util.printSQLError(e);
+            System.err.print(Util.printSQLError(e));
         }
     }
 

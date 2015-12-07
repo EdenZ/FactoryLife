@@ -58,8 +58,10 @@ public class FactoryLife extends JavaPlugin {
         }
         setupPermissions();
         setupChat();
+        //For first setup
         saveDefaultConfig();
         saveResource("Storage.db", false);
+        //Enable main functions
         orderControl = new OrderController(this);
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);

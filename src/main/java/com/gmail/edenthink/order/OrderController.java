@@ -39,6 +39,11 @@ public class OrderController implements Listener{
         manager.resetOrderTimes();
     }
 
+    /**
+     * Called when player try to finish an order
+     * @param player who
+     * @param orderNo which order
+     */
     @SuppressWarnings("deprecation")
     public void processOrder(Player player, int orderNo) {
         if (orderNo == 1) {
@@ -50,6 +55,13 @@ public class OrderController implements Listener{
         }
     }
 
+    /**
+     * See walther or not able to complete order
+     * @param player who
+     * @param orderType which
+     * @param items what is needed
+     * @param reward the reward
+     */
     @SuppressWarnings("deprecation")
     private void processStep(Player player, String orderType, ItemStack[] items, double reward) {
         for (ItemStack item : items) {
@@ -73,6 +85,10 @@ public class OrderController implements Listener{
         }
     }
 
+    /**
+     * Insert new row for player
+     * @param event event
+     */
     @EventHandler
     public void joinPlayerOrderCheck(PlayerJoinEvent event) {
         manager.insertNewOrder(event.getPlayer().getName());

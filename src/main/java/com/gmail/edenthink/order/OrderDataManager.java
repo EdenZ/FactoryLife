@@ -22,7 +22,9 @@ public class OrderDataManager {
         try (Statement statement = Driver.getConnection().createStatement()){
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            System.err.print(Util.printSQLError(e));
+            if (e.getErrorCode() != 0) {
+                System.err.print(Util.printSQLError(e));
+            }
         }
     }
 

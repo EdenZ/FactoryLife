@@ -7,7 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Created by Eden on 2015/12/7.
+ * /ticket info
+ * /ticket buy one|two|three
  */
 public class TicketCommand implements CommandExecutor {
     private final TicketController controller;
@@ -23,23 +24,30 @@ public class TicketCommand implements CommandExecutor {
         }
         if (command.getName().equalsIgnoreCase("ticket")) {
             if (strings.length == 1) {
+                //info
                 if (strings[0].equalsIgnoreCase("info")) {
                     commandSender.sendMessage(String.format("Ticket: %3d", controller.getData().getTicket(commandSender.getName())));
                     return true;
                 }
             } else if (strings.length == 2) {
                 if (strings[0].equalsIgnoreCase("buy")) {
+                    //one
                     if (strings[1].equalsIgnoreCase("one")) {
                         if (Util.withdraw((Player) commandSender, 40)) {
                             controller.getData().modifyTicket(commandSender.getName(), 20);
+                            return true;
                         }
+                        //two
                     } else if (strings[1].equalsIgnoreCase("two")) {
                         if (Util.withdraw((Player) commandSender, 50)) {
                             controller.getData().modifyTicket(commandSender.getName(), 30);
+                            return true;
                         }
+                        //three
                     } else if (strings[1].equalsIgnoreCase("three")) {
                         if (Util.withdraw((Player) commandSender, 70)) {
                             controller.getData().modifyTicket(commandSender.getName(), 50);
+                            return true;
                         }
                     }
                 }

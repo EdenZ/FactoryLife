@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Eden on 2015/12/7.
+ * Main class for ticket system
  */
 public class TicketController implements Listener {
     private final FactoryLife plugin;
@@ -30,14 +31,27 @@ public class TicketController implements Listener {
         return data;
     }
 
+    /**
+     * Check player has ticket
+     * @param player who
+     * @return true if owning ticket
+     */
     public boolean checkTicket(String player) {
         return data.getTicket(player) > 0;
     }
 
+    /**
+     * Consuming ticket
+     * @param player who
+     */
     public void consumeTicket(String player) {
         data.modifyTicket(player, -1);
     }
 
+    /**
+     * Cancel player place ore block
+     * @param event event
+     */
     @SuppressWarnings("deprecation")
     @EventHandler
     public void noOrePlaced(BlockPlaceEvent event) {
@@ -49,6 +63,10 @@ public class TicketController implements Listener {
         }
     }
 
+    /**
+     * The main function of ticket
+     * @param event event
+     */
     @EventHandler
     public void ticketFunction(BlockBreakEvent event) {
         if (event.isCancelled()) {
@@ -62,5 +80,14 @@ public class TicketController implements Listener {
                 event.getBlock().getWorld().dropItem(loc, item);
             }
         }
+    }
+
+    /**
+     * Insert a row for new player
+     * @param event event
+     */
+    @EventHandler
+    public void newPlayer(PlayerJoinEvent event) {
+        data.newPlayer(event.getPlayer().getName());
     }
 }
