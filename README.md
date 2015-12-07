@@ -1,15 +1,15 @@
 # This is a note for developers #
 
 ## Order ##
-* Player has three orders for each day.
-* Each order can be completed three times per day.
-* Finishing order will get financial reward.
-* Command /order
+* __Player has three orders for each day.__
+* __Each order can be completed three times per day.__
+* __Finishing order will get financial reward.__
+* __Command /order__
     - info
     - one
     - two
     - three
-* The limit will be reset every 24h.
+* __The limit will be reset every 24h.__
 * _Fix the reset time to 6 am_
 * _Random reward_
 * _Random orders_
@@ -22,12 +22,12 @@
 * _Coming soon_
 
 ##GeneratorCost##
-* _Placing generators will need to pay a fee_
+* __Placing generators will need to pay a fee__
     - normal:   30
     - Geo:      50
     - Nuclear:  300
     - Adv. solar
-        - 0 :   100
-        - 1:    250
+        - 0 :   70
+        - 1:    120
         - 2:    500
         - 3:    1000
