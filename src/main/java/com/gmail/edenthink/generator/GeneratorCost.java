@@ -1,13 +1,14 @@
 package com.gmail.edenthink.generator;
 
 import com.gmail.edenthink.FactoryLife;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import static com.gmail.edenthink.tools.Util.withdraw;
+
 /**
- * Created by Eden on 2015/12/7.
+ * Place generator cost money
  */
 public class GeneratorCost implements Listener {
     private final FactoryLife plugin;
@@ -76,9 +77,5 @@ public class GeneratorCost implements Listener {
                 event.setCancelled(true);
             }
         }
-    }
-
-    private boolean withdraw(Player player, int amount) {
-        return FactoryLife.getEcon().withdrawPlayer(player, amount).transactionSuccess();
     }
 }

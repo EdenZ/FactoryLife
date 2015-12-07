@@ -5,3 +5,4 @@ main: com.gmail.edenthink.FactoryLife
 softdepend: [vault]
 commands:
    order:
+   ticket:

@@ -23,6 +23,11 @@ public class TicketController implements Listener {
     public TicketController(FactoryLife plugin) {
         this.plugin = plugin;
         data = new TicketData();
+        plugin.getCommand("ticket").setExecutor(new TicketCommand(this));
+    }
+
+    public TicketData getData() {
+        return data;
     }
 
     public boolean checkTicket(String player) {
