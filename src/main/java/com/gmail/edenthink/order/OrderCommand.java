@@ -25,7 +25,7 @@ public class OrderCommand implements CommandExecutor {
                 int one = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_ONE);
                 int two = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_TWO);
                 int three = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_THREE);
-                commandSender.sendMessage(String.format("Order one: %d%nOrder two: %d%nOrder three: %d", one, two, three));
+                commandSender.sendMessage(String.format("Order one: %d\nOrder two: %d\nOrder three: %d", one, two, three));
                 return true;
                 //order one
             } else if (strings[0].equalsIgnoreCase("one")) {

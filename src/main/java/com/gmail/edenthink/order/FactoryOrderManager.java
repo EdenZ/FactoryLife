@@ -13,9 +13,9 @@ import java.sql.Statement;
 public class FactoryOrderManager {
     final String PLAYER = "player";
     final String TABLE = "factory_order";
-    final String ORDER_ONE = "order_one";
-    final String ORDER_TWO = "order_two";
-    final String ORDER_THREE = "order_three";
+    final String ORDER_ONE = "order_one_times";
+    final String ORDER_TWO = "order_two_times";
+    final String ORDER_THREE = "order_three_times";
 
     public void insertNewOrder(String player) {
         String sql = String.format("INSERT INTO %s (%s) VALUES (\"%s\");", TABLE, PLAYER, player);
