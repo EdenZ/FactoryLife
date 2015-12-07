@@ -2,6 +2,7 @@ package com.gmail.edenthink;
 
 import com.gmail.edenthink.generator.GeneratorCost;
 import com.gmail.edenthink.order.OrderController;
+import com.gmail.edenthink.ticket.TicketController;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -21,6 +22,7 @@ public class FactoryLife extends JavaPlugin {
     private OrderController orderControl;
     public static final boolean DEBUG = false;
     private GeneratorCost generatorCost;
+    private TicketController ticketCotrol;
 
     public OrderController getOrderControl() {
         return orderControl;
@@ -60,6 +62,7 @@ public class FactoryLife extends JavaPlugin {
         saveResource("Storage.db", false);
         orderControl = new OrderController(this);
         generatorCost = new GeneratorCost(this);
+        ticketCotrol = new TicketController(this);
     }
 
     private boolean setupEconomy() {
