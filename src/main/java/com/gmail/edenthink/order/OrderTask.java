@@ -1,5 +1,6 @@
 package com.gmail.edenthink.order;
 
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
@@ -18,6 +19,7 @@ public class OrderTask {
         @Override
         public void run() {
             orderController.resetOrder();
+            Bukkit.getServer().broadcastMessage("Making new order");
         }
     }
 }

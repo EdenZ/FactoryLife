@@ -82,7 +82,7 @@ public class OrderController implements Listener{
             }
             FactoryLife.getEcon().depositPlayer(player, reward);
             player.sendMessage("Order completed");
-        }
+        } else player.sendMessage("You have no order left.");
     }
 
     /**
