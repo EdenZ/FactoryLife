@@ -30,15 +30,12 @@ public class OrderCommand implements CommandExecutor {
                 //order one
             } else if (strings[0].equalsIgnoreCase("one")) {
                 orderController.processOrder((Player) commandSender, 1);
-                commandSender.sendMessage("Order completed");
                 return true;
             } else if (strings[0].equalsIgnoreCase("two")) {
                 orderController.processOrder((Player) commandSender, 2);
-                commandSender.sendMessage("Order completed");
                 return true;
             } else if (strings[0].equalsIgnoreCase("three")) {
                 orderController.processOrder((Player) commandSender, 2);
-                commandSender.sendMessage("Order completed");
                 return true;
             }
         }

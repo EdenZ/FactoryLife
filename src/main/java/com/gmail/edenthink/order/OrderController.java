@@ -54,6 +54,7 @@ public class OrderController implements Listener{
     private void processStep(Player player, String orderType, ItemStack[] items, double reward) {
         for (ItemStack item : items) {
             if (!Util.checkItem(player.getInventory(), item.getTypeId(), item.getDurability(), item.getAmount())) {
+                player.sendMessage("not enough item: "+item.toString());
                 return;
             }
             if (FactoryLife.DEBUG) {
@@ -68,6 +69,7 @@ public class OrderController implements Listener{
                 plugin.getLogger().info("Item removed");
             }
             FactoryLife.getEcon().depositPlayer(player, reward);
+            player.sendMessage("Order completed");
         }
     }
 

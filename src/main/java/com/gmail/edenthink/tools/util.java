@@ -42,6 +42,7 @@ public class Util {
      * @param amount    how much
      * @return whether or not this inventory has enough items
      */
+    @SuppressWarnings("deprecation")
     public static boolean checkItem(Inventory inventory, int id, int data, int amount) {
         for (ItemStack is : inventory.getContents()) {
             if (is != null && is.getTypeId() == id && is.getData().getData() == data) {
