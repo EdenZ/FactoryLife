@@ -10,7 +10,7 @@ import java.sql.Statement;
 /**
  * Controlling database
  */
-public class FactoryOrderManager {
+public class OrderDataManager {
     final String PLAYER = "player";
     final String TABLE = "factory_order";
     final String ORDER_ONE = "order_one_times";

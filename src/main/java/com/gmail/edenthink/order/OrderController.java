@@ -13,12 +13,12 @@ import org.bukkit.inventory.ItemStack;
  */
 public class OrderController implements Listener{
     private final FactoryLife plugin;
-    private final FactoryOrderManager manager;
+    private final OrderDataManager manager;
     private final OrderTask orderTask;
 
     public OrderController(FactoryLife plugin) {
         this.plugin = plugin;
-        manager = new FactoryOrderManager();
+        manager = new OrderDataManager();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.getCommand("order").setExecutor(new OrderCommand(this));
         orderTask = new OrderTask(this);
@@ -28,7 +28,7 @@ public class OrderController implements Listener{
         return plugin;
     }
 
-    public FactoryOrderManager getManager() {
+    public OrderDataManager getManager() {
         return manager;
     }
 
