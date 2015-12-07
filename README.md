@@ -1,4 +1,5 @@
-# This is a note for developers #
+# Factory life # 
+Build your world
 
 ## Order ##
 - [x] __Player has three orders for each day.__
@@ -20,11 +21,13 @@
 * [x] __Player will get double resource while they hold ticket__
 * [x] __Also, this action will consume one ticket__
 * [x] Stopping plauer places ore block
-* [ ] Command /ticket
+* [x] Command /ticket
     - info
     - buy 20
     - buy 30
     - buy 50
+* [ ] Random drop items
+* [ ] Advance ticket type
 
 ##GeneratorCost##
 * [x] Placing generators will need to pay a fee
