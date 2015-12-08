@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class AEGetter implements CommandExecutor {
     private final FactoryLife plugin;
-    private final String PERM = "Ae.item";
+    private final String PERM = "FactoryLife.ae";
 
     public AEGetter(FactoryLife plugin) {
         this.plugin = plugin;
@@ -33,12 +33,16 @@ public class AEGetter implements CommandExecutor {
                 switch (a) {
                     case 0:
                         ((Player) commandSender).getInventory().addItem(new ItemStack(4340, 1, (short) 13));
+                        break;
                     case 1:
                         ((Player) commandSender).getInventory().addItem(new ItemStack(4340, 1, (short) 14));
+                        break;
                     case 2:
                         ((Player) commandSender).getInventory().addItem(new ItemStack(4340, 1, (short) 15));
+                        break;
                     case 3:
                         ((Player) commandSender).getInventory().addItem(new ItemStack(4340, 1, (short) 19));
+                        break;
                 }
                 FactoryLife.getPerms().playerAdd((Player) commandSender, PERM);
             } else commandSender.sendMessage("NO WAY");

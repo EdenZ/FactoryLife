@@ -7,3 +7,6 @@ commands:
    order:
    ticket:
    aeitems:
+permissions:
+   FactoryLife.ae:
+      default: false
