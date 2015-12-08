@@ -1,4 +1,4 @@
-package com.gmail.edenthink.generator;
+package com.gmail.edenthink.general;
 
 import com.gmail.edenthink.FactoryLife;
 import org.bukkit.event.EventHandler;

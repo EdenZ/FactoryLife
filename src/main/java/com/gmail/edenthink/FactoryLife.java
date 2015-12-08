@@ -1,6 +1,7 @@
 package com.gmail.edenthink;
 
-import com.gmail.edenthink.generator.GeneratorCost;
+import com.gmail.edenthink.general.AEGetter;
+import com.gmail.edenthink.general.GeneratorCost;
 import com.gmail.edenthink.order.OrderController;
 import com.gmail.edenthink.ticket.TicketController;
 import net.milkbowl.vault.chat.Chat;
@@ -65,6 +66,7 @@ public class FactoryLife extends JavaPlugin {
         orderControl = new OrderController(this);
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);
+        getCommand("aeitems").setExecutor(new AEGetter(this));
     }
 
     private boolean setupEconomy() {

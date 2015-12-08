@@ -1,8 +1,9 @@
 name: FactoryLife
-version: 0.1
+version: 0.1.3
 author: Eden
 main: com.gmail.edenthink.FactoryLife
 softdepend: [vault]
 commands:
    order:
    ticket:
+   aeitems:
