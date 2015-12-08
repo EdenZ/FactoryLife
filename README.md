@@ -11,9 +11,9 @@ Build your world
     - two
     - three
 - [x] The limit will be reset every 24h.
-- [ ] Fix the reset time to 6 am
-- [ ] Random reward
-- [ ] Random orders
+- [ ] 刷新时间固定为早上6点
+- [ ] 奖励随机波动
+- [ ] 随机订单生成
     - Random items and amount
     - Random time
 
@@ -26,10 +26,21 @@ Build your world
     - buy 20
     - buy 30
     - buy 50
-* [ ] Random drop items
-* [ ] Advance ticket type
+* [ ] 随机掉落数量
+* [ ] 多样化矿票
 
-##GeneratorCost##
+## 成就系统 ##
+* [ ] 采集
+    - 矿石：
+    - 钻石：
+    - 石头：
+* [ ] 怪物
+    - JJ怪
+    - 僵尸骷髅
+    - 小黑
+* [ ] 合成？
+
+## GeneratorCost ##
 * [x] Placing generators will need to pay a fee
     - normal:   30
     - Geo:      50
