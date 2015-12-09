@@ -30,15 +30,13 @@ Build your world
 * [ ] 多样化矿票
 
 ## 成就系统 ##
-* [ ] 采集
-    - 矿石：
-    - 钻石：
-    - 石头：
-* [ ] 怪物
-    - JJ怪
-    - 僵尸骷髅
-    - 小黑
-* [ ] 合成？
+__Wanta will do this part...__
+
+## InventorySaver ##
+* [ ] __Main__: Save player's inventory when they die
+* [ ] Free for the frist 3 times per day
+* [ ] Otherwise will cost H15.0 each time
+* [ ] A command to switch on/off
 
 ## GeneratorCost ##
 * [x] Placing generators will need to pay a fee
