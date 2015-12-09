@@ -30,7 +30,7 @@ Build your world
 * [ ] 多样化矿票
 
 ## 成就系统 ##
-__ Wanta will do this part...__
+__Wanta will do this part...__
 
 ## InventorySaver ##
 * [ ] __Main__: Save player's inventory when they die
