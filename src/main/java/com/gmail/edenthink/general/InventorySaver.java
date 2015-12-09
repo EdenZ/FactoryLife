@@ -1,6 +1,7 @@
 package com.gmail.edenthink.general;
 
 import com.gmail.edenthink.FactoryLife;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -60,6 +61,27 @@ public class InventorySaver implements Listener,CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if (!(commandSender instanceof Player)) {
+            return false;
+        }
+        Player player = (Player) commandSender;
+        if (command.getName().equalsIgnoreCase("saverinv")) {
+            if (strings.length == 1) {
+                //chest
+                if (strings[0].equalsIgnoreCase("chest")) {
+                    if (players.contains(player)) {
+                        return false;
+                    }
+                    players.add(player);
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                        if (players.contains(player)) {
+                            players.remove(player);
+                        }
+                    }, 20 * 10);
+                    return true;
+                }
+            }
+        }
         return false;
     }
 }
