@@ -1,6 +1,7 @@
 # Note #
 
-* [ ] A command add player to list/saver chest
+* [x] A command add player to list/saver chest
+   * [x] player will be removed after 10 sec
 * [ ] if player on the list, the next chest he click will become his respawn chest
 * [ ] respawn condition
     * [ ] daily saver
