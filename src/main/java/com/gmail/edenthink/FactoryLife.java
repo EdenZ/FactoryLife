@@ -2,6 +2,7 @@ package com.gmail.edenthink;
 
 import com.gmail.edenthink.general.AEGetter;
 import com.gmail.edenthink.general.GeneratorCost;
+import com.gmail.edenthink.general.InventorySaver;
 import com.gmail.edenthink.order.OrderController;
 import com.gmail.edenthink.ticket.TicketController;
 import net.milkbowl.vault.chat.Chat;
@@ -24,6 +25,7 @@ public class FactoryLife extends JavaPlugin {
     public static final boolean DEBUG = false;
     private GeneratorCost generatorCost;
     private TicketController ticketCotrol;
+    private InventorySaver saver;
 
     public OrderController getOrderControl() {
         return orderControl;
@@ -66,6 +68,7 @@ public class FactoryLife extends JavaPlugin {
         orderControl = new OrderController(this);
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);
+        saver = new InventorySaver(this);
         getCommand("aeitems").setExecutor(new AEGetter(this));
     }
 

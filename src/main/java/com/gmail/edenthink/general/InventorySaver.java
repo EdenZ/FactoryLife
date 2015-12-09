@@ -1,8 +1,8 @@
 package com.gmail.edenthink.general;
 
 import com.gmail.edenthink.FactoryLife;
+import com.gmail.edenthink.tools.Util;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,22 +10,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Eden on 2015/12/9.
  */
 public class InventorySaver implements Listener,CommandExecutor {
     private final FactoryLife plugin;
-    private List<Player> players = new LinkedList<>();
+    private Map<Player, ItemStack[]> playerMap = new HashMap<>();
 
     public InventorySaver(FactoryLife plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.getCommand("saveinv").setExecutor(this);
+        Bukkit.getScheduler().runTaskTimer(plugin, GeneralData::resetRemain, Util.tickToNextSixAM(), 24 * 60 * 60 * 20);
     }
 
     @EventHandler
@@ -41,22 +43,18 @@ public class InventorySaver implements Listener,CommandExecutor {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        if (players.contains(event.getPlayer())) {
-            if (event.getClickedBlock().getTypeId() == 54) {
-                setRespawnChest(event.getPlayer(), event.getClickedBlock().getLocation());
-            }
-        }
+    public void onRespawn(PlayerRespawnEvent event) {
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            event.getPlayer().getInventory().setContents(playerMap.get(event.getPlayer()));
+            playerMap.remove(event.getPlayer());
+        }, 30);
     }
 
+    @SuppressWarnings("deprecation")
     private void saveItem(Player player) {
-
-    }
-
-    public void setRespawnChest(Player player, Location location) {
-
+        playerMap.put(player, player.getInventory().getContents());
+        player.getInventory().clear();
     }
 
     @Override
@@ -67,18 +65,14 @@ public class InventorySaver implements Listener,CommandExecutor {
         Player player = (Player) commandSender;
         if (command.getName().equalsIgnoreCase("saverinv")) {
             if (strings.length == 1) {
-                //chest
-                if (strings[0].equalsIgnoreCase("chest")) {
-                    if (players.contains(player)) {
-                        return false;
-                    }
-                    players.add(player);
-                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                        if (players.contains(player)) {
-                            players.remove(player);
-                        }
-                    }, 20 * 10);
+                if (strings[0].equalsIgnoreCase("on")) {
+                    GeneralData.setSwitch(player.getName(), true);
                     return true;
+                } else if (strings[0].equalsIgnoreCase("off")) {
+                    GeneralData.setSwitch(player.getName(), false);
+                    return true;
+                } else if (strings[0].equalsIgnoreCase("info")) {
+                    player.sendMessage(String.format("Time Left: %d\nState: %3s", GeneralData.getRemain(player.getName()), GeneralData.getSwitch(player.getName())));
                 }
             }
         }

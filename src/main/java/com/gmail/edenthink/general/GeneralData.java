@@ -2,8 +2,11 @@ package com.gmail.edenthink.general;
 
 import com.gmail.edenthink.tools.Driver;
 import com.gmail.edenthink.tools.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -35,15 +38,31 @@ public class GeneralData {
 
     public static Location getChestLocation(String player) {
         Location loc = null;
+        String sql = String.format("SELECT * FROM location WHERE owner = \'%s\' AND type = \"respawnchest\";", player);
+        try (Statement statement = Driver.getConnection().createStatement()) {
+            try (ResultSet set = statement.executeQuery(sql)) {
+                if (set.next()) {
+                    double x = set.getDouble("x");
+                    double y = set.getDouble("y");
+                    double z = set.getDouble("z");
+                    World world = Bukkit.getWorld(set.getString("world"));
+                    loc = new Location(world, x, y, z);
+                }
+            }
+
+        } catch (SQLException e) {
+            Util.printSQLError(e);
+        }
+
         return loc;
     }
 
     public static void setChestLocation(String player, double x, double y, double z, String world) {
         String sql = String.format("INSERT INTO location " +
-                "VALUES (%s, \'respawnchest\', %d, %d, %d, %s);", player, x, y, z, world);
+                "VALUES (%s, \'respawnchest\', %f, %f, %f, %s);", player, x, y, z, world);
         if (getChestLocation(player) != null) {
             sql = String.format("UPDATE location" +
-                    "SET x = %d, y = %d, z = %d, world = \"%s\"" +
+                    "SET x = %f, y = %f, z = %f, world = \"%s\"" +
                     "WHERE owner = \"%s\" AND type = \"respawnchest\";", x, y, z, world, player);
         }
         try (Statement statement = Driver.getConnection().createStatement()) {
@@ -56,14 +75,31 @@ public class GeneralData {
     }
 
     public static void resetRemain() {
-
+        String sql = String.format("UPDATE %s SET %s = 3;", TABLE, IS_LEFT);
     }
 
     public static void setSwitch(String player, boolean isEnable) {
-
+        String sql = String.format("UPDATE %s SET %s = %s WHERE %s = \"%s\";", TABLE, IS_SWITCH, isEnable, NAME, player);
+        try (Statement statement = Driver.getConnection().createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            Util.printSQLError(e);
+        }
     }
 
     public static boolean getSwitch(String player) {
-        return false;
+        boolean isOn = false;
+        String sql = String.format("SELECT %s FROM %s WHERE %s = \"%s\";", IS_SWITCH, TABLE, NAME, player);
+        try (Statement s = Driver.getConnection().createStatement()) {
+            try (ResultSet set = s.executeQuery(sql)) {
+                if (set.next()) {
+                    isOn = set.getBoolean(IS_SWITCH);
+                }
+            }
+        } catch (SQLException e) {
+            Util.printSQLError(e);
+        }
+
+        return isOn;
     }
 }
