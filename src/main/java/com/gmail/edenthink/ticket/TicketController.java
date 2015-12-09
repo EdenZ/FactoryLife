@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class TicketController implements Listener {
     private final FactoryLife plugin;
-    private final List<Integer> ORE_ID = new ArrayList<>(Arrays.asList(14, 15165, 166, 167, 168));
+    private final List<Integer> ORE_ID = new ArrayList<>(Arrays.asList(14, 15, 56, 165, 166, 167, 168));
     private final TicketData data;
 
     public TicketController(FactoryLife plugin) {
