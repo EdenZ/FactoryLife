@@ -23,7 +23,7 @@ public class OrderDataManager {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             if (e.getErrorCode() != 0) {
-                System.err.print(Util.printSQLError(e));
+                Util.printSQLError(e);
             }
         }
     }
@@ -35,7 +35,7 @@ public class OrderDataManager {
         try (Statement statement = Driver.getConnection().createStatement()){
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            System.err.print(Util.printSQLError(e));
+            Util.printSQLError(e);
         }
         return true;
     }
@@ -56,14 +56,14 @@ public class OrderDataManager {
                 num = set.getInt(orderNo);
             }
         } catch (SQLException e) {
-            System.err.print(Util.printSQLError(e));
+            Util.printSQLError(e);
         }
         finally {
             if (set != null) {
                 try {
                     set.close();
                 } catch (SQLException e) {
-                    System.err.print(Util.printSQLError(e));
+                    Util.printSQLError(e);
                 }
             }
         }
@@ -75,7 +75,7 @@ public class OrderDataManager {
         try (Statement statement = Driver.getConnection().createStatement()){
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            System.err.print(Util.printSQLError(e));
+            Util.printSQLError(e);
         }
     }
 }

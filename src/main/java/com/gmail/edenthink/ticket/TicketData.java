@@ -21,7 +21,7 @@ public class TicketData {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
             if (e.getErrorCode() != 0) {
-                System.err.print(Util.printSQLError(e));
+                Util.printSQLError(e);
             }
         }
     }
@@ -29,14 +29,12 @@ public class TicketData {
     public int getTicket(String player) {
         int num = 0;
         String sql = String.format("SELECT %s FROM %s WHERE %s = \"%s\";", TICKET, TABLE, PLAYER, player);
-        try (Statement statement = Driver.getConnection().createStatement()) {
-            try (ResultSet set = statement.executeQuery(sql);) {
-                if (set.next()) {
-                    num = set.getInt(TICKET);
-                }
+        try (Statement statement = Driver.getConnection().createStatement(); ResultSet set = statement.executeQuery(sql)) {
+            if (set.next()) {
+                num = set.getInt(TICKET);
             }
         } catch (SQLException e) {
-            System.err.print(Util.printSQLError(e));
+            Util.printSQLError(e);
         }
         return num;
     }
@@ -46,7 +44,7 @@ public class TicketData {
         try (Statement statement = Driver.getConnection().createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            System.err.print(Util.printSQLError(e));
+            Util.printSQLError(e);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.gmail.edenthink.order;
 
+import com.gmail.edenthink.tools.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -11,7 +12,7 @@ public class OrderTask {
 
     public OrderTask(OrderController orderController) {
         this.orderController = orderController;
-        new ResetOrderTask().runTaskTimer(orderController.getPlugin(), 20 * 60 * 60, 20 * 60 * 60 * 24);
+        new ResetOrderTask().runTaskTimer(orderController.getPlugin(), Util.tickToNextSixAM(), 20 * 60 * 60 * 24);
     }
 
     class ResetOrderTask extends BukkitRunnable {

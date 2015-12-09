@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,26 +36,36 @@ public class InventorySaver implements Listener,CommandExecutor {
         Player player = event.getEntity();
         if (GeneralData.getRemain(player.getName()) > 0) {
             saveItem(player);
+            event.getDrops().clear();
             GeneralData.setRemain(player.getName(), GeneralData.getRemain(player.getName()) - 1);
         } else if (GeneralData.getSwitch(player.getName())) {
             if (FactoryLife.getEcon().withdrawPlayer(player,15).transactionSuccess()){
                 saveItem(player);
+                event.getDrops().clear();
             }
         }
     }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        if (!playerMap.containsKey(player)) {
+            return;
+        }
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            event.getPlayer().getInventory().setContents(playerMap.get(event.getPlayer()));
-            playerMap.remove(event.getPlayer());
+            player.getInventory().setContents(playerMap.get(player));
+            playerMap.remove(player);
         }, 30);
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        GeneralData.newPlayer(event.getPlayer().getName());
     }
 
     @SuppressWarnings("deprecation")
     private void saveItem(Player player) {
         playerMap.put(player, player.getInventory().getContents());
-        player.getInventory().clear();
     }
 
     @Override
@@ -63,13 +74,13 @@ public class InventorySaver implements Listener,CommandExecutor {
             return false;
         }
         Player player = (Player) commandSender;
-        if (command.getName().equalsIgnoreCase("saverinv")) {
+        if (command.getName().equalsIgnoreCase("saveinv")) {
             if (strings.length == 1) {
                 if (strings[0].equalsIgnoreCase("on")) {
-                    GeneralData.setSwitch(player.getName(), true);
+                    GeneralData.setSwitch(player.getName(), 1);
                     return true;
                 } else if (strings[0].equalsIgnoreCase("off")) {
-                    GeneralData.setSwitch(player.getName(), false);
+                    GeneralData.setSwitch(player.getName(), 0);
                     return true;
                 } else if (strings[0].equalsIgnoreCase("info")) {
                     player.sendMessage(String.format("Time Left: %d\nState: %3s", GeneralData.getRemain(player.getName()), GeneralData.getSwitch(player.getName())));

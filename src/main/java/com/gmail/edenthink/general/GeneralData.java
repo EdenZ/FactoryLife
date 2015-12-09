@@ -29,11 +29,25 @@ public class GeneralData {
     }
 
     public static int getRemain(String player) {
-        return 0;
+        String sql = String.format("SELECT * FROM %s WHERE %s = \"%s\";", TABLE, NAME, player);
+        int num = 0;
+        try (Statement s = Driver.getConnection().createStatement(); ResultSet set = s.executeQuery(sql)) {
+            if (set.next()) {
+                num = set.getInt(IS_LEFT);
+            }
+        } catch (SQLException e) {
+            Util.printSQLError(e);
+        }
+        return num;
     }
 
     public static void setRemain(String player, int num) {
-
+        String sql = String.format("UPDATE %s SET %s = %d WHERE %s = \"%s\";", TABLE, IS_LEFT, num, NAME, player);
+        try (Statement statement = Driver.getConnection().createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            Util.printSQLError(e);
+        }
     }
 
     public static Location getChestLocation(String player) {
@@ -76,10 +90,15 @@ public class GeneralData {
 
     public static void resetRemain() {
         String sql = String.format("UPDATE %s SET %s = 3;", TABLE, IS_LEFT);
+        try (Statement statement = Driver.getConnection().createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            Util.printSQLError(e);
+        }
     }
 
-    public static void setSwitch(String player, boolean isEnable) {
-        String sql = String.format("UPDATE %s SET %s = %s WHERE %s = \"%s\";", TABLE, IS_SWITCH, isEnable, NAME, player);
+    public static void setSwitch(String player, int isOn) {
+        String sql = String.format("UPDATE %s SET %s = %d WHERE %s = \"%s\";", TABLE, IS_SWITCH, isOn, NAME, player);
         try (Statement statement = Driver.getConnection().createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -88,18 +107,17 @@ public class GeneralData {
     }
 
     public static boolean getSwitch(String player) {
-        boolean isOn = false;
+        int isOn = 0;
         String sql = String.format("SELECT %s FROM %s WHERE %s = \"%s\";", IS_SWITCH, TABLE, NAME, player);
         try (Statement s = Driver.getConnection().createStatement()) {
             try (ResultSet set = s.executeQuery(sql)) {
                 if (set.next()) {
-                    isOn = set.getBoolean(IS_SWITCH);
+                    isOn = set.getInt(IS_SWITCH);
                 }
             }
         } catch (SQLException e) {
             Util.printSQLError(e);
         }
-
-        return isOn;
+        return isOn == 1;
     }
 }
