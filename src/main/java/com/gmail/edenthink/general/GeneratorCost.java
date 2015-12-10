@@ -72,14 +72,14 @@ public class GeneratorCost implements Listener {
                     event.getPlayer().sendMessage("You need H200.0 to place this.");
                 }
             }else if (data == 2) {
-                if (!withdraw(event.getPlayer(), 500)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H500.0 to place this.");
-                }
-            }else if (data == 3) {
                 if (!withdraw(event.getPlayer(), 1000)) {
                     event.setCancelled(true);
                     event.getPlayer().sendMessage("You need H1000.0 to place this.");
+                }
+            }else if (data == 3) {
+                if (!withdraw(event.getPlayer(), 10000)) {
+                    event.setCancelled(true);
+                    event.getPlayer().sendMessage("You need H10000.0 to place this.");
                 }
             }
         } else if (id == 229) {

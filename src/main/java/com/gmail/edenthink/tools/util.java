@@ -6,6 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 /**
  * Created by Eden on 2015/12/5.
@@ -65,8 +66,8 @@ public class Util {
      * @param e exception
      * @return error format
      */
-    public static String printSQLError(SQLException e) {
-        return String.format("SQL message(%3d): %s", e.getErrorCode(), e.getMessage());
+    public static void printSQLError(SQLException e) {
+        FactoryLife.getLog().info(String.format("SQL message(%3d): %s", e.getErrorCode(), e.getMessage()));
     }
 
     /**
@@ -77,5 +78,20 @@ public class Util {
      */
     public static boolean withdraw(Player player, int amount) {
         return FactoryLife.getEcon().withdrawPlayer(player, amount).transactionSuccess();
+    }
+
+    /**
+     * Find out the tick left to 6 am
+     * @return tick left
+     */
+    public static int tickToNextSixAM() {
+        LocalDateTime time = LocalDateTime.now();
+        int h = time.getHour();
+        int timeleft = 0;
+        if (h > 6) {
+            timeleft += (30 - h) * 60 * 60 * 20;
+        } else timeleft += (6 - h) * 60 * 60 * 20;
+        FactoryLife.getLog().info(String.valueOf(timeleft - time.getMinute() * 60 * 20));
+        return timeleft - time.getMinute() * 60 * 20;
     }
 }

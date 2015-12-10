@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Eden on 2015/12/9.
+ * Save player's inventory when death
  */
 public class InventorySaver implements Listener,CommandExecutor {
     private final FactoryLife plugin;
@@ -31,6 +31,10 @@ public class InventorySaver implements Listener,CommandExecutor {
         Bukkit.getScheduler().runTaskTimer(plugin, GeneralData::resetRemain, Util.tickToNextSixAM(), 24 * 60 * 60 * 20);
     }
 
+    /**
+     * If it is on good condition, player's inventory will be saved
+     * @param event death event
+     */
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
@@ -46,6 +50,10 @@ public class InventorySaver implements Listener,CommandExecutor {
         }
     }
 
+    /**
+     * Reset player's inventory
+     * @param event respawn event
+     */
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
@@ -58,11 +66,19 @@ public class InventorySaver implements Listener,CommandExecutor {
         }, 30);
     }
 
+    /**
+     * Just add a row
+     * @param event join event
+     */
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         GeneralData.newPlayer(event.getPlayer().getName());
     }
 
+    /**
+     * Put inventory on map
+     * @param player player
+     */
     @SuppressWarnings("deprecation")
     private void saveItem(Player player) {
         playerMap.put(player, player.getInventory().getContents());
