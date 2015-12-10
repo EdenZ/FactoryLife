@@ -11,7 +11,7 @@ Build your world
     - two
     - three
 - [x] The limit will be reset every 24h.
-- [ ] 刷新时间固定为早上6点
+- [x] 刷新时间固定为早上6点
 - [ ] 奖励随机波动
 - [ ] 随机订单生成
     - Random items and amount
@@ -31,6 +31,9 @@ Build your world
 
 ## 成就系统 ##
 __Wanta will do this part...__
+
+## Guard ##
+- COMING SOON
 
 ## InventorySaver ##
 * [ ] __Main__: Save player's inventory when they die
