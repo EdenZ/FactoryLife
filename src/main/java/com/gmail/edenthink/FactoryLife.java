@@ -5,6 +5,7 @@ import com.gmail.edenthink.general.GeneratorCost;
 import com.gmail.edenthink.general.InventorySaver;
 import com.gmail.edenthink.order.OrderController;
 import com.gmail.edenthink.ticket.TicketController;
+import com.gmail.edenthink.tools.Driver;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -49,6 +50,7 @@ public class FactoryLife extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Driver.disconnect();
         log.info(String.format("[%s] Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
     }
 
