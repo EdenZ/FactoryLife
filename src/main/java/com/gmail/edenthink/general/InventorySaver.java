@@ -23,6 +23,7 @@ import java.util.Map;
 public class InventorySaver implements Listener,CommandExecutor {
     private final FactoryLife plugin;
     private Map<Player, ItemStack[]> playerMap = new HashMap<>();
+    private Map<Player, ItemStack[]> playerEquMap = new HashMap<>();
 
     public InventorySaver(FactoryLife plugin) {
         this.plugin = plugin;
@@ -46,7 +47,7 @@ public class InventorySaver implements Listener,CommandExecutor {
             if (FactoryLife.getEcon().withdrawPlayer(player,15).transactionSuccess()){
                 saveItem(player);
                 event.getDrops().clear();
-            }
+            } else player.sendMessage("No money no bb");
         }
     }
 
@@ -63,6 +64,8 @@ public class InventorySaver implements Listener,CommandExecutor {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             player.getInventory().setContents(playerMap.get(player));
             playerMap.remove(player);
+            player.getInventory().setArmorContents(playerEquMap.get(player));
+            playerEquMap.remove(player);
         }, 30);
     }
 
@@ -82,6 +85,7 @@ public class InventorySaver implements Listener,CommandExecutor {
     @SuppressWarnings("deprecation")
     private void saveItem(Player player) {
         playerMap.put(player, player.getInventory().getContents());
+        playerEquMap.put(player, player.getInventory().getArmorContents());
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.gmail.edenthink;
 import com.gmail.edenthink.general.AEGetter;
 import com.gmail.edenthink.general.GeneratorCost;
 import com.gmail.edenthink.general.InventorySaver;
+import com.gmail.edenthink.general.LoginHelper;
 import com.gmail.edenthink.order.OrderController;
 import com.gmail.edenthink.ticket.TicketController;
 import com.gmail.edenthink.tools.Driver;
@@ -71,7 +72,7 @@ public class FactoryLife extends JavaPlugin {
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);
         saver = new InventorySaver(this);
-        //new LoginHelper(this);
+        new LoginHelper(this);
         getCommand("aeitems").setExecutor(new AEGetter(this));
     }
 
