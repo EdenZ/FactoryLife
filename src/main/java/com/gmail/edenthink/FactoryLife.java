@@ -71,6 +71,7 @@ public class FactoryLife extends JavaPlugin {
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);
         saver = new InventorySaver(this);
+        //new LoginHelper(this);
         getCommand("aeitems").setExecutor(new AEGetter(this));
     }
 
