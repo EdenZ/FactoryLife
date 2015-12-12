@@ -23,8 +23,6 @@ import java.util.List;
  */
 public class InventorySaver implements Listener,CommandExecutor {
     private final FactoryLife plugin;
-//    private Map<Player, ItemStack[]> playerMap = new HashMap<>();
-//    private Map<Player, ItemStack[]> playerEquMap = new HashMap<>();
     private DataAccess invData;
 
     public InventorySaver(FactoryLife plugin) {
@@ -61,17 +59,10 @@ public class InventorySaver implements Listener,CommandExecutor {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-//        if (!playerMap.containsKey(player)) {
-//            return;
-//        }
         if (!invData.getData().contains(player.getName())) {
             return;
         }
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-//            player.getInventory().setContents(playerMap.get(player));
-//            playerMap.remove(player);
-//            player.getInventory().setArmorContents(playerEquMap.get(player));
-//            playerEquMap.remove(player);
             player.getInventory().setContents((ItemStack[]) ((List) invData.getData().get(player.getName() + ".inv")).toArray());
             player.getInventory().setArmorContents((ItemStack[]) ((List) invData.getData().get(player.getName() + ".arm")).toArray());
             invData.getData().set(player.getName(), null);
@@ -96,9 +87,7 @@ public class InventorySaver implements Listener,CommandExecutor {
      */
     @SuppressWarnings("deprecation")
     private void saveItem(Player player) {
-        //playerMap.put(player, player.getInventory().getContents());
         invData.getData().set(player.getName() + ".inv", Arrays.asList(player.getInventory().getContents()));
-        //playerEquMap.put(player, player.getInventory().getArmorContents());
         invData.getData().set(player.getName() + ".arm", Arrays.asList(player.getInventory().getArmorContents()));
         invData.saveData();
     }
