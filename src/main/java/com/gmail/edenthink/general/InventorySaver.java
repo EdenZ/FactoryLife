@@ -1,6 +1,7 @@
 package com.gmail.edenthink.general;
 
 import com.gmail.edenthink.FactoryLife;
+import com.gmail.edenthink.tools.DataAccess;
 import com.gmail.edenthink.tools.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,19 +15,21 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Save player's inventory when death
  */
 public class InventorySaver implements Listener,CommandExecutor {
     private final FactoryLife plugin;
-    private Map<Player, ItemStack[]> playerMap = new HashMap<>();
-    private Map<Player, ItemStack[]> playerEquMap = new HashMap<>();
+//    private Map<Player, ItemStack[]> playerMap = new HashMap<>();
+//    private Map<Player, ItemStack[]> playerEquMap = new HashMap<>();
+    private DataAccess invData;
 
     public InventorySaver(FactoryLife plugin) {
         this.plugin = plugin;
+        invData = new DataAccess(plugin, plugin.getDataFolder().getAbsolutePath(), "invData.yml");
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.getCommand("saveinv").setExecutor(this);
         Bukkit.getScheduler().runTaskTimer(plugin, GeneralData::resetRemain, Util.tickToNextSixAM(), 24 * 60 * 60 * 20);
@@ -58,16 +61,25 @@ public class InventorySaver implements Listener,CommandExecutor {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        if (!playerMap.containsKey(player)) {
+//        if (!playerMap.containsKey(player)) {
+//            return;
+//        }
+        if (!invData.getData().contains(player.getName())) {
             return;
         }
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            player.getInventory().setContents(playerMap.get(player));
-            playerMap.remove(player);
-            player.getInventory().setArmorContents(playerEquMap.get(player));
-            playerEquMap.remove(player);
+//            player.getInventory().setContents(playerMap.get(player));
+//            playerMap.remove(player);
+//            player.getInventory().setArmorContents(playerEquMap.get(player));
+//            playerEquMap.remove(player);
+            player.getInventory().setContents((ItemStack[]) ((List) invData.getData().get(player.getName() + ".inv")).toArray());
+            player.getInventory().setArmorContents((ItemStack[]) ((List) invData.getData().get(player.getName() + ".arm")).toArray());
+            invData.getData().set(player.getName(), null);
+            invData.saveData();
         }, 30);
     }
+
+
 
     /**
      * Just add a row
@@ -84,8 +96,11 @@ public class InventorySaver implements Listener,CommandExecutor {
      */
     @SuppressWarnings("deprecation")
     private void saveItem(Player player) {
-        playerMap.put(player, player.getInventory().getContents());
-        playerEquMap.put(player, player.getInventory().getArmorContents());
+        //playerMap.put(player, player.getInventory().getContents());
+        invData.getData().set(player.getName() + ".inv", Arrays.asList(player.getInventory().getContents()));
+        //playerEquMap.put(player, player.getInventory().getArmorContents());
+        invData.getData().set(player.getName() + ".arm", Arrays.asList(player.getInventory().getArmorContents()));
+        invData.saveData();
     }
 
     @Override
