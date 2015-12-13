@@ -12,6 +12,11 @@ import static com.gmail.edenthink.tools.Util.withdraw;
  */
 public class GeneratorCost implements Listener {
     private final FactoryLife plugin;
+    private final String NORMAL = "general.generator.normal";
+    private final String GEO = "general.generator.geo";
+    private final String NUCLEAR = "general.generator.nuclear";
+    // TODO: 12/13/2015 Other generators here
+
 
     public GeneratorCost(FactoryLife plugin) {
         this.plugin = plugin;
@@ -35,60 +40,60 @@ public class GeneratorCost implements Listener {
             if (data == 0) {
                 if (!withdraw(event.getPlayer(), 30)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H30.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             } else if (data == 1) {
                 if (!withdraw(event.getPlayer(), 50)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H50.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             } else if (data == 5) {
                 if (!withdraw(event.getPlayer(), 300)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H300.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             } else if (data == 2 || data == 3 || data == 4) {
                 if (!withdraw(event.getPlayer(), 5)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H5.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             } else if (data == 9) {
                 if (!withdraw(event.getPlayer(), 120)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H120.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             } else {
                 if (!withdraw(event.getPlayer(), 70)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H70.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             }
         } else if (id == 232) {
             if (data == 0) {
                 if (!withdraw(event.getPlayer(), 70)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H70.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             }else if (data == 1) {
                 if (!withdraw(event.getPlayer(), 200)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H200.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             }else if (data == 2) {
                 if (!withdraw(event.getPlayer(), 1000)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H1000.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             }else if (data == 3) {
                 if (!withdraw(event.getPlayer(), 10000)) {
                     event.setCancelled(true);
-                    event.getPlayer().sendMessage("You need H10000.0 to place this.");
+                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
                 }
             }
         } else if (id == 229) {
             if (!withdraw(event.getPlayer(), 7)) {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage("You need H7.0 to place this.");
+                event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
             }
         }
     }

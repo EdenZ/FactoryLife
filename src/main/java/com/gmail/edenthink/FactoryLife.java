@@ -59,6 +59,7 @@ public class FactoryLife extends JavaPlugin {
     @Override
     public void onDisable() {
         Driver.disconnect();
+        langData.saveData();
         log.info(String.format("[%s] Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
     }
 

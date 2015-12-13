@@ -1,3 +1,9 @@
 general:
   ae_item: Here you are.
   ae_item_get: You've already get one.
+  inv_save:
+  inv_no_money:
+  generator:
+    normal:
+    geo:
+    nuclear:

@@ -24,6 +24,8 @@ import java.util.List;
 public class InventorySaver implements Listener,CommandExecutor {
     private final FactoryLife plugin;
     private DataAccess invData;
+    private final String INV_SAVE = "general.inv_save";
+    private final String INV_NO_MONEY = "general.inv_no_money";
 
     public InventorySaver(FactoryLife plugin) {
         this.plugin = plugin;
@@ -48,7 +50,7 @@ public class InventorySaver implements Listener,CommandExecutor {
             if (FactoryLife.getEcon().withdrawPlayer(player,15).transactionSuccess()){
                 saveItem(player);
                 event.getDrops().clear();
-            } else player.sendMessage("No money no bb");
+            } else player.sendMessage(plugin.getLangData().getData().getString(INV_NO_MONEY));
         }
     }
 
@@ -65,6 +67,7 @@ public class InventorySaver implements Listener,CommandExecutor {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             player.getInventory().setContents((ItemStack[]) ((List) invData.getData().get(player.getName() + ".inv")).toArray());
             player.getInventory().setArmorContents((ItemStack[]) ((List) invData.getData().get(player.getName() + ".arm")).toArray());
+            event.getPlayer().sendMessage(plugin.getLangData().getData().getString(INV_SAVE));
             invData.getData().set(player.getName(), null);
             invData.saveData();
         }, 30);
