@@ -1,5 +1,6 @@
 package com.gmail.edenthink.general;
 
+import com.gmail.edenthink.tools.DataAccess;
 import com.gmail.edenthink.tools.Driver;
 import com.gmail.edenthink.tools.Util;
 import org.bukkit.Bukkit;
@@ -18,6 +19,7 @@ public class GeneralData {
     public static final String NAME = "name", IS_LEFT = "is_left", IS_SWITCH = "is_switch";
 
     public static void newPlayer(String player) {
+
         String sql = String.format("INSERT INTO %s (%s) VALUES (\"%s\");", TABLE, NAME, player);
         try (Statement statement = Driver.getConnection().createStatement()) {
             statement.executeUpdate(sql);

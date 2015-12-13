@@ -15,9 +15,12 @@ import java.util.Random;
 public class AEGetter implements CommandExecutor {
     private final FactoryLife plugin;
     private final String PERM = "FactoryLife.ae";
+    private final String AE = "general.ae_item";
+    private final String AE_GET = "general.ae_item_gat";
 
     public AEGetter(FactoryLife plugin) {
         this.plugin = plugin;
+
     }
 
     @SuppressWarnings("deprecation")
@@ -45,7 +48,8 @@ public class AEGetter implements CommandExecutor {
                         break;
                 }
                 FactoryLife.getPerms().playerAdd((Player) commandSender, PERM);
-            } else commandSender.sendMessage("NO WAY");
+                commandSender.sendMessage(plugin.getLangData().getData().getString(AE));
+            } else commandSender.sendMessage(plugin.getLangData().getData().getString(AE_GET));
             return true;
         }
         return false;

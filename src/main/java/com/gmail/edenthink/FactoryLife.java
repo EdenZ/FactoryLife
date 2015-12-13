@@ -6,6 +6,7 @@ import com.gmail.edenthink.general.InventorySaver;
 import com.gmail.edenthink.general.LoginHelper;
 import com.gmail.edenthink.order.OrderController;
 import com.gmail.edenthink.ticket.TicketController;
+import com.gmail.edenthink.tools.DataAccess;
 import com.gmail.edenthink.tools.Driver;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
@@ -28,9 +29,15 @@ public class FactoryLife extends JavaPlugin {
     private GeneratorCost generatorCost;
     private TicketController ticketCotrol;
     private InventorySaver saver;
+    private DataAccess langData;
 
     public OrderController getOrderControl() {
         return orderControl;
+    }
+
+
+    public DataAccess getLangData() {
+        return langData;
     }
 
     public static Economy getEcon() {
@@ -68,6 +75,7 @@ public class FactoryLife extends JavaPlugin {
         saveDefaultConfig();
         saveResource("Storage.db", false);
         //Enable main functions
+        langData = new DataAccess(this, getDataFolder().getAbsolutePath(), "lnag.yml");
         orderControl = new OrderController(this);
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);

@@ -91,7 +91,6 @@ public class Util {
         if (h > 6) {
             timeleft += (30 - h) * 60 * 60 * 20;
         } else timeleft += (6 - h) * 60 * 60 * 20;
-        FactoryLife.getLog().info(String.valueOf(timeleft - time.getMinute() * 60 * 20));
-        return timeleft - time.getMinute() * 60 * 20;
+        return timeleft - time.getMinute() * 60 * 20 - time.getSecond() * 20;
     }
 }

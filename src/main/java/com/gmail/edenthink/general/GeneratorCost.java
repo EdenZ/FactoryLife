@@ -27,6 +27,9 @@ public class GeneratorCost implements Listener {
         if (event.getBlock().getTypeId() != 194 && event.getBlock().getTypeId() != 232 && event.getBlock().getTypeId() == 229) {
             return;
         }
+        if (event.getPlayer().isOp()) {
+            return;
+        }
         int id = event.getBlock().getTypeId(), data = event.getBlock().getData();
         if (id == 194) {
             if (data == 0) {
