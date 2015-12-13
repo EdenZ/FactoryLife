@@ -15,6 +15,8 @@ public class OrderController implements Listener{
     private final FactoryLife plugin;
     private final OrderDataManager manager;
     private final OrderTask orderTask;
+    private final String COMPLETE = "order.complete";
+    private final String NO_ORDER = "order.no_order";
 
     public OrderController(FactoryLife plugin) {
         this.plugin = plugin;
@@ -81,8 +83,8 @@ public class OrderController implements Listener{
                 plugin.getLogger().info("Item removed");
             }
             FactoryLife.getEcon().depositPlayer(player, reward);
-            player.sendMessage("Order completed");
-        } else player.sendMessage("You have no order left.");
+            player.sendMessage(plugin.getLangData().getData().getString(COMPLETE));
+        } else player.sendMessage(plugin.getLangData().getData().getString(NO_ORDER));
     }
 
     /**

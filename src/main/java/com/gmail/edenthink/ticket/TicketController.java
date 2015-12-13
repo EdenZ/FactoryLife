@@ -59,6 +59,9 @@ public class TicketController implements Listener {
         if (event.isCancelled()) {
             return;
         }
+        if (event.getPlayer().isOp()) {
+            return;
+        }
         if (ORE_ID.contains(event.getBlock().getTypeId())) {
             event.setCancelled(true);
         }
