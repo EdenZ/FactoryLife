@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Main class for ticket system
@@ -84,7 +85,12 @@ public class TicketController implements Listener {
         if (checkTicket(name)) {
             consumeTicket(name);
             Location loc = event.getBlock().getLocation();
+            boolean isDiamond = event.getBlock().getTypeId() == 54;
+            Random ran = new Random();
             for (ItemStack item : event.getBlock().getDrops()) {
+                if (isDiamond && ran.nextInt(100) < 69) {
+                    continue;
+                }
                 event.getBlock().getWorld().dropItem(loc, item);
             }
         }

@@ -15,6 +15,16 @@ public class Crafter {
         this.plugin = plugin;
     }
 
+    @SuppressWarnings("deprecation")
+    public void prepare(Player player, int type) {
+        if (type == 0) {
+            if (false/*Check permission and items required*/) {
+
+            }
+            craftItem(player, new ItemStack(5, 5), 60 * 5);
+        }
+    }
+
     public void craftItem(Player player, ItemStack item, int time) {
         // TODO: 12/13/2015 Add item to player's inventory after time
     }

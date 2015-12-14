@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Random;
+
 /**
  * The controlling class for order system
  */
@@ -82,7 +84,9 @@ public class OrderController implements Listener{
             if (FactoryLife.DEBUG) {
                 plugin.getLogger().info("Item removed");
             }
-            FactoryLife.getEcon().depositPlayer(player, reward);
+            Random ran = new Random();
+            double ranReward = (ran.nextBoolean() ? reward + ran.nextInt(10) : reward - ran.nextInt(10));
+            FactoryLife.getEcon().depositPlayer(player, ranReward);
             player.sendMessage(plugin.getLangData().getData().getString(COMPLETE));
         } else player.sendMessage(plugin.getLangData().getData().getString(NO_ORDER));
     }
