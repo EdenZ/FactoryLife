@@ -1,5 +1,6 @@
 package com.gmail.edenthink;
 
+import com.gmail.edenthink.black.Crafter;
 import com.gmail.edenthink.general.AEGetter;
 import com.gmail.edenthink.general.GeneratorCost;
 import com.gmail.edenthink.general.InventorySaver;
@@ -30,6 +31,7 @@ public class FactoryLife extends JavaPlugin {
     private TicketController ticketCotrol;
     private InventorySaver saver;
     private DataAccess langData;
+    private Crafter crafter;
 
     public OrderController getOrderControl() {
         return orderControl;
@@ -81,6 +83,7 @@ public class FactoryLife extends JavaPlugin {
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);
         saver = new InventorySaver(this);
+        crafter = new Crafter(this);
         new LoginHelper(this);
         getCommand("aeitems").setExecutor(new AEGetter(this));
     }

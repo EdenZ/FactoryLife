@@ -9,7 +9,11 @@ import org.bukkit.entity.Player;
  * Created by Eden on 12/14/2015.
  */
 public class CraftCommand implements CommandExecutor {
+    private final Crafter crafter;
 
+    public CraftCommand(Crafter crafter) {
+        this.crafter = crafter;
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -20,7 +24,7 @@ public class CraftCommand implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("craft")) {
             if (strings.length == 1) {
                 if (strings[0].equalsIgnoreCase("mt")) {
-                    // TODO: 12/14/2015 Take items and craft new item
+                    crafter.prepare(player, 4303, 12);
                     return true;
                 }
             }
