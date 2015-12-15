@@ -61,4 +61,17 @@ public class DataAccess {
             FactoryLife.getLog().log(Level.SEVERE, "Could not save config to " + dataFile, e);
         }
     }
+
+    public void saveDefault() {
+        if (dataFile == null) {
+            dataFile = new File(parent, fileName);
+        }
+        if (!dataFile.exists()) {
+            try {
+                plugin.saveResource(fileName, false);
+            } catch (Exception e) {
+                FactoryLife.getLog().info("Can not save default " + fileName);
+            }
+        }
+    }
 }

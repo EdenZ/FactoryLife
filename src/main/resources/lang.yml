@@ -1,14 +1,14 @@
 general:
-  ae_item: Here you are.
-  ae_item_get: You've already get one.
-  inv_save:
-  inv_no_money:
+  ae_item: here
+  ae_item_get: no
+  inv_save: biu
+  inv_no_money: no money no bb
   generator:
-    normal:
+    normal:  Need H%4d
     geo:
     nuclear:
 order:
-  complete:
-  no_order:
+  complete: complete %f
+  no_order: no order
 ticket:
 

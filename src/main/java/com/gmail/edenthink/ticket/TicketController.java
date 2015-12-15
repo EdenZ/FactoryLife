@@ -85,8 +85,9 @@ public class TicketController implements Listener {
         if (checkTicket(name)) {
             consumeTicket(name);
             Location loc = event.getBlock().getLocation();
-            boolean isDiamond = event.getBlock().getTypeId() == 54;
+            boolean isDiamond = event.getBlock().getTypeId() == 56;
             Random ran = new Random();
+
             for (ItemStack item : event.getBlock().getDrops()) {
                 if (isDiamond && ran.nextInt(100) < 69) {
                     continue;

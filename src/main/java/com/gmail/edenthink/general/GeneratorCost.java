@@ -36,65 +36,42 @@ public class GeneratorCost implements Listener {
             return;
         }
         int id = event.getBlock().getTypeId(), data = event.getBlock().getData();
+        int cost = 0;
         if (id == 194) {
             if (data == 0) {
-                if (!withdraw(event.getPlayer(), 30)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 30;
             } else if (data == 1) {
-                if (!withdraw(event.getPlayer(), 50)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 50;
             } else if (data == 5) {
-                if (!withdraw(event.getPlayer(), 300)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+
+                cost = 300;
             } else if (data == 2 || data == 3 || data == 4) {
-                if (!withdraw(event.getPlayer(), 5)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+
+                cost = 5;
             } else if (data == 9) {
-                if (!withdraw(event.getPlayer(), 120)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 120;
             } else {
-                if (!withdraw(event.getPlayer(), 70)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 70;
             }
         } else if (id == 232) {
             if (data == 0) {
-                if (!withdraw(event.getPlayer(), 70)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 70;
             }else if (data == 1) {
-                if (!withdraw(event.getPlayer(), 200)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 200;
             }else if (data == 2) {
-                if (!withdraw(event.getPlayer(), 1000)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 1000;
             }else if (data == 3) {
-                if (!withdraw(event.getPlayer(), 10000)) {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-                }
+                cost = 10000;
             }
         } else if (id == 229) {
-            if (!withdraw(event.getPlayer(), 7)) {
-                event.setCancelled(true);
-                event.getPlayer().sendMessage(plugin.getLangData().getData().getString(NORMAL));
-            }
+            cost = 7;
+        }
+        if (cost == 0) {
+            return;
+        }
+        if (!withdraw(event.getPlayer(), cost)) {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage(String.format(plugin.getLangData().getData().getString(NORMAL), cost));
         }
     }
 }

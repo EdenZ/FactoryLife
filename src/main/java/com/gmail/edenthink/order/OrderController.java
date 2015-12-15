@@ -85,9 +85,14 @@ public class OrderController implements Listener{
                 plugin.getLogger().info("Item removed");
             }
             Random ran = new Random();
-            double ranReward = (ran.nextBoolean() ? reward + ran.nextInt(10) : reward - ran.nextInt(10));
-            FactoryLife.getEcon().depositPlayer(player, ranReward);
-            player.sendMessage(plugin.getLangData().getData().getString(COMPLETE));
+
+            if (ran.nextBoolean()) {
+                reward -= ran.nextInt(10);
+            } else {
+                reward += ran.nextInt(10);
+            }
+            FactoryLife.getEcon().depositPlayer(player, reward);
+            player.sendMessage(String.format(plugin.getLangData().getData().getString(COMPLETE), reward));
         } else player.sendMessage(plugin.getLangData().getData().getString(NO_ORDER));
     }
 

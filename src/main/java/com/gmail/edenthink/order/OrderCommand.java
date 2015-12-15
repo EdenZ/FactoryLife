@@ -35,7 +35,7 @@ public class OrderCommand implements CommandExecutor {
                 orderController.processOrder((Player) commandSender, 2);
                 return true;
             } else if (strings[0].equalsIgnoreCase("three")) {
-                orderController.processOrder((Player) commandSender, 2);
+                orderController.processOrder((Player) commandSender, 3);
                 return true;
             }
         }

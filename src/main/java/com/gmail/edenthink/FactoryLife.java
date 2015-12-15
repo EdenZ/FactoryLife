@@ -59,7 +59,6 @@ public class FactoryLife extends JavaPlugin {
     @Override
     public void onDisable() {
         Driver.disconnect();
-        langData.saveData();
         log.info(String.format("[%s] Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
     }
 
@@ -75,8 +74,9 @@ public class FactoryLife extends JavaPlugin {
         //For first setup
         saveDefaultConfig();
         saveResource("Storage.db", false);
+        langData = new DataAccess(this, getDataFolder().getAbsolutePath(), "lang.yml");
+        langData.saveDefault();
         //Enable main functions
-        langData = new DataAccess(this, getDataFolder().getAbsolutePath(), "lnag.yml");
         orderControl = new OrderController(this);
         generatorCost = new GeneratorCost(this);
         ticketCotrol = new TicketController(this);
