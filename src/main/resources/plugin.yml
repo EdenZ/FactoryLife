@@ -12,3 +12,5 @@ commands:
 permissions:
    FactoryLife.ae:
       default: false
+   FactoryLife.crafter.mt:
+      default: false

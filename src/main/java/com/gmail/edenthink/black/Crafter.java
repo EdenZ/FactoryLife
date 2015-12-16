@@ -22,16 +22,22 @@ public class Crafter {
     @SuppressWarnings("deprecation")
     public void prepare(Player player, int type, int id) {
         if (type == 4303 && id == 12) {
-            if (FactoryLife.getPerms().playerHas(player,MT_PERM)) {
+            if (FactoryLife.getPerms().has(player,MT_PERM)) {
                 ItemStack[] itemsNeeded = {new ItemStack(4303, 12, (short) 5), new ItemStack(4228, 4, (short) 1)};
                 for (ItemStack item : itemsNeeded) {
-                    if (!Util.checkItem(player.getInventory(), item.getTypeId(), item.getDurability(), item.getAmount())) {
+                    if (item.getTypeId() == 4228 && !Util.checkItem(player.getInventory(), item.getTypeId(), item.getAmount())) {
+                        player.sendMessage("not enough item: "+item.toString());
+                        return;
+                    }
+                    else if (!Util.checkItem(player.getInventory(), item.getTypeId(), item.getDurability(), item.getAmount())) {
                         player.sendMessage("not enough item: "+item.toString());
                         return;
                     }
                 }
                 for (ItemStack item : itemsNeeded) {
-                    Util.removeItems(player.getInventory(), item.getTypeId(), item.getDurability(), item.getAmount());
+                    if ((item.getTypeId() == 4228)) {
+                        Util.removeItems(player.getInventory(), item.getTypeId(), item.getAmount());
+                    } else Util.removeItems(player.getInventory(), item.getTypeId(), item.getDurability(), item.getAmount());
                 }
                 player.sendMessage("In process");
                 craftItem(player, new ItemStack(4303, 1, (short) 12), 60 * 5);
