@@ -7,6 +7,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Eden on 2015/12/5.
@@ -21,7 +23,7 @@ public class Util {
      * @param amount    How much
      */
     @SuppressWarnings({"deprecation", "Duplicates"})
-    public static void removeItems(Inventory inventory, int id, int data, int amount) {
+    public static void removeItem(Inventory inventory, int id, int data, int amount) {
         for (ItemStack is : inventory.getContents()) {
             if (is != null && is.getTypeId() == id && is.getData().getData() == data) {
                 int newAmount = is.getAmount() - amount;
@@ -38,7 +40,7 @@ public class Util {
     }
 
     @SuppressWarnings({"deprecation", "Duplicates"})
-    public static void removeItems(Inventory inventory, int id, int amount) {
+    public static void removeItem(Inventory inventory, int id, int amount) {
         for (ItemStack is : inventory.getContents()) {
             if (is != null && is.getTypeId() == id) {
                 int newAmount = is.getAmount() - amount;
@@ -63,7 +65,7 @@ public class Util {
      * @return whether or not this inventory has enough items
      */
     @SuppressWarnings({"deprecation", "Duplicates"})
-    public static boolean checkItem(Inventory inventory, int id, int data, int amount) {
+    public static boolean hasItem(Inventory inventory, int id, int data, int amount) {
         for (ItemStack is : inventory.getContents()) {
             if (is != null && is.getTypeId() == id && is.getData().getData() == data) {
                 int newAmount = is.getAmount() - amount;
@@ -79,7 +81,7 @@ public class Util {
     }
 
     @SuppressWarnings({"deprecation", "Duplicates"})
-    public static boolean checkItem(Inventory inventory, int id, int amount) {
+    public static boolean hasItem(Inventory inventory, int id, int amount) {
         for (ItemStack is : inventory.getContents()) {
             if (is != null && is.getTypeId() == id) {
                 int newAmount = is.getAmount() - amount;
@@ -92,6 +94,51 @@ public class Util {
             }
         }
         return amount == 0;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static List<ItemStack> removeItems(Inventory inv, ItemStack[] items, List<Integer> noMetaIDs) {
+        List<ItemStack> lack = new ArrayList<>();
+        for (ItemStack item : items) {
+            if (noMetaIDs.contains(item.getTypeId())) {
+                if (!hasItem(inv, item.getTypeId(), item.getAmount())) {
+                    lack.add(item);
+                }
+            } else {
+                if (!hasItem(inv, item.getTypeId(), item.getDurability(), item.getAmount())) {
+                    lack.add(item);
+                }
+            }
+        }
+        if (!lack.isEmpty()) {
+            return lack;
+        }
+        for (ItemStack item : items) {
+            if (noMetaIDs.contains(item.getTypeId())) {
+                removeItem(inv, item.getTypeId(), item.getAmount());
+            } else {
+                removeItem(inv, item.getTypeId(), item.getDurability(), item.getAmount());
+            }
+        }
+        return lack;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static List<ItemStack> removeItems(Inventory inv, ItemStack[] items) {
+        List<ItemStack> lack = new ArrayList<>();
+        for (ItemStack item : items) {
+                if (!hasItem(inv, item.getTypeId(), item.getAmount())) {
+                    lack.add(item);
+            }
+        }
+        if (!lack.isEmpty()) {
+            return lack;
+        }
+        for (ItemStack item : items) {
+                removeItem(inv, item.getTypeId(), item.getDurability(), item.getAmount());
+
+        }
+        return lack;
     }
 
     /**

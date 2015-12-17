@@ -20,22 +20,10 @@ public class OrderCommand implements CommandExecutor {
         if (!(commandSender instanceof Player)) return false;
         if (command.getName().equalsIgnoreCase("order")) {
             if (strings.length != 1) return false;
-            //order info
             if (strings[0].equalsIgnoreCase("info")) {
-                int one = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_ONE);
-                int two = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_TWO);
-                int three = orderController.getManager().getRemain(commandSender.getName(),orderController.getManager().ORDER_THREE);
-                commandSender.sendMessage(String.format("Order one: %d\nOrder two: %d\nOrder three: %d", one, two, three));
                 return true;
-                //order one
-            } else if (strings[0].equalsIgnoreCase("one")) {
-                orderController.processOrder((Player) commandSender, 1);
-                return true;
-            } else if (strings[0].equalsIgnoreCase("two")) {
-                orderController.processOrder((Player) commandSender, 2);
-                return true;
-            } else if (strings[0].equalsIgnoreCase("three")) {
-                orderController.processOrder((Player) commandSender, 3);
+            }
+            if (strings[0].equalsIgnoreCase("one")) {
                 return true;
             }
         }
