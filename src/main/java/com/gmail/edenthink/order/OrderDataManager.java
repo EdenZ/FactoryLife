@@ -1,12 +1,5 @@
 package com.gmail.edenthink.order;
 
-import com.gmail.edenthink.tools.Driver;
-import com.gmail.edenthink.tools.Util;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 /**
  * Controlling database
  */
@@ -18,26 +11,10 @@ public class OrderDataManager {
     final String ORDER_THREE = "order_three_times";
 
     public void insertNewOrder(String player) {
-        String sql = String.format("INSERT INTO %s (%s) VALUES (\"%s\");", TABLE, PLAYER, player);
-        try (Statement statement = Driver.getConnection().createStatement()){
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            if (e.getErrorCode() != 0) {
-                Util.printSQLError(e);
-            }
-        }
     }
 
     public boolean orderTimesReduce(String player, String orderNo) {
-        int current = getRemain(player, orderNo);
-        if (current < 1) return false;
-        String sql = String.format("UPDATE %s SET %s = %d WHERE %s = \"%s\";", TABLE, orderNo, current - 1, PLAYER, player);
-        try (Statement statement = Driver.getConnection().createStatement()){
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            Util.printSQLError(e);
-        }
-        return true;
+        return false;
     }
 
     /**
@@ -47,35 +24,9 @@ public class OrderDataManager {
      * @return number
      */
     public int getRemain(String player, String orderNo) {
-        int num = 0;
-        ResultSet set = null;
-        String sql = String.format("SELECT %s FROM %s WHERE %s = \"%s\"", orderNo, TABLE, PLAYER, player);
-        try (Statement statement = Driver.getConnection().createStatement()){
-            set = statement.executeQuery(sql);
-            if (set.next()) {
-                num = set.getInt(orderNo);
-            }
-        } catch (SQLException e) {
-            Util.printSQLError(e);
-        }
-        finally {
-            if (set != null) {
-                try {
-                    set.close();
-                } catch (SQLException e) {
-                    Util.printSQLError(e);
-                }
-            }
-        }
-        return num;
+        return 0;
     }
 
     public void resetOrderTimes() {
-        String sql = String.format("UPDATE %s SET %s = 3, %s = 3, %s = 3", TABLE, ORDER_ONE, ORDER_TWO, ORDER_THREE);
-        try (Statement statement = Driver.getConnection().createStatement()){
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            Util.printSQLError(e);
-        }
     }
 }
