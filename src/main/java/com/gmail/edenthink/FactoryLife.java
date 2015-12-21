@@ -1,6 +1,5 @@
 package com.gmail.edenthink;
 
-import com.gmail.edenthink.general.InventorySaver;
 import com.gmail.edenthink.general.LoginHelper;
 import com.gmail.edenthink.model.PlayerData;
 import com.gmail.edenthink.tools.DataAccess;
@@ -22,8 +21,6 @@ public class FactoryLife extends JavaPlugin {
     public static Economy econ = null;
     public static Permission perms = null;
     public static Chat chat = null;
-    public static final boolean DEBUG = false;
-    private InventorySaver saver;
     private DataAccess langData;
 
     public DataAccess getLangData() {
@@ -74,7 +71,6 @@ public class FactoryLife extends JavaPlugin {
         langData = new DataAccess(this, getDataFolder().getAbsolutePath(), "lang.yml");
         langData.saveDefault();
         //Enable main functions
-        saver = new InventorySaver(this);
         new LoginHelper(this);
     }
 

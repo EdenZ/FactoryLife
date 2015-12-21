@@ -18,7 +18,7 @@ public class OrderData {
     @Id
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private PlayerData owner;
 
     @CreatedTimestamp
@@ -30,7 +30,7 @@ public class OrderData {
     @NotNull
     private double reward;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "order")
     private List<ItemData> items;
 
     public Long getId() {

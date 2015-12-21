@@ -2,10 +2,7 @@ package com.gmail.edenthink.model;
 
 import com.avaje.ebean.validation.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *Item data
@@ -21,12 +18,12 @@ public class ItemData {
     private int typeId;
 
     @NotNull
-    private int meta = 0;
+    private int meta = -1;
 
     @NotNull
     private int amount = 1;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private OrderData order;
 
     public Long getId() {

@@ -19,7 +19,7 @@ public class PlayerData{
     @Column(unique = true)
     private String player;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "owner")
     private List<OrderData> orders;
 
     public int getId() {
