@@ -1,12 +1,8 @@
 package com.gmail.edenthink;
 
-import com.gmail.edenthink.black.Crafter;
-import com.gmail.edenthink.general.AEGetter;
-import com.gmail.edenthink.general.GeneratorCost;
 import com.gmail.edenthink.general.InventorySaver;
 import com.gmail.edenthink.general.LoginHelper;
-import com.gmail.edenthink.order.OrderController;
-import com.gmail.edenthink.ticket.TicketController;
+import com.gmail.edenthink.model.PlayerData;
 import com.gmail.edenthink.tools.DataAccess;
 import com.gmail.edenthink.tools.Driver;
 import net.milkbowl.vault.chat.Chat;
@@ -15,6 +11,7 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.persistence.PersistenceException;
 import java.util.logging.Logger;
 
 /**
@@ -25,18 +22,9 @@ public class FactoryLife extends JavaPlugin {
     public static Economy econ = null;
     public static Permission perms = null;
     public static Chat chat = null;
-    private OrderController orderControl;
     public static final boolean DEBUG = false;
-    private GeneratorCost generatorCost;
-    private TicketController ticketCotrol;
     private InventorySaver saver;
     private DataAccess langData;
-    private Crafter crafter;
-
-    public OrderController getOrderControl() {
-        return orderControl;
-    }
-
 
     public DataAccess getLangData() {
         return langData;
@@ -66,6 +54,7 @@ public class FactoryLife extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        //For Vault
         if (!setupEconomy() ) {
             log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
@@ -73,19 +62,20 @@ public class FactoryLife extends JavaPlugin {
         }
         setupPermissions();
         setupChat();
+        //Just for database
+        try {
+            getDatabase().find(PlayerData.class).findRowCount();
+        } catch (PersistenceException ex) {
+            System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
+            installDDL();
+        }
         //For first setup
         saveDefaultConfig();
-        saveResource("Storage.db", false);
         langData = new DataAccess(this, getDataFolder().getAbsolutePath(), "lang.yml");
         langData.saveDefault();
         //Enable main functions
-        orderControl = new OrderController(this);
-        generatorCost = new GeneratorCost(this);
-        ticketCotrol = new TicketController(this);
         saver = new InventorySaver(this);
-        crafter = new Crafter(this);
         new LoginHelper(this);
-        getCommand("aeitems").setExecutor(new AEGetter(this));
     }
 
     private boolean setupEconomy() {

@@ -1,14 +1,2 @@
-general:
-  ae_item: here
-  ae_item_get: no
-  inv_save: biu
-  inv_no_money: no money no bb
-  generator:
-    normal:  Need H%4d
-    geo:
-    nuclear:
-order:
-  complete: complete %f
-  no_order: no order
-ticket:
+
 
