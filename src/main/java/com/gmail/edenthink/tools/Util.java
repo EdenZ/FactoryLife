@@ -97,6 +97,13 @@ public class Util {
         return amount == 0;
     }
 
+    /**
+     * Remove items from inventory.
+     * @param inv Which inventory
+     * @param items All items well be removed
+     * @param noMetaIDs A list of item id that has no data
+     * @return Empty list if all items are removed, or what item is not enough
+     */
     @SuppressWarnings("deprecation")
     public static List<ItemStack> removeItems(Inventory inv, ItemStack[] items, List<Integer> noMetaIDs) {
         List<ItemStack> lack = new ArrayList<>();
@@ -124,6 +131,12 @@ public class Util {
         return lack;
     }
 
+    /**
+     * Remove from inventory
+     * @param inv Which inventory
+     * @param items What to remove
+     * @return Empty list if all items are removed, or what item is not enough
+     */
     @SuppressWarnings("deprecation")
     public static List<ItemStack> removeItems(Inventory inv, ItemStack[] items) {
         List<ItemStack> lack = new ArrayList<>();
@@ -165,7 +178,7 @@ public class Util {
      * Find out the tick left to 6 am
      * @return tick left
      */
-    public static int tickToNextSixAM() {
+    public static int timingToSixAM() {
         LocalDateTime time = LocalDateTime.now();
         int h = time.getHour();
         int timeleft = 0;
