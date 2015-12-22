@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by Eden on 2015/12/5.
+ * Some helping methods for plugin
  */
 public class Util {
     /**

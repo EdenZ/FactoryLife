@@ -9,6 +9,7 @@ import java.util.logging.Level;
 
 /**
  * Created by Eden on 11/23/2015.
+ * A yml file data access
  */
 public class DataAccess {
     private FileConfiguration data = null;

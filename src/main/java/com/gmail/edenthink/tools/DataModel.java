@@ -2,6 +2,7 @@ package com.gmail.edenthink.tools;
 
 /**
  * Created by Eden on 2015/12/22.
+ * My model interface
  */
 public interface DataModel {
     /**
