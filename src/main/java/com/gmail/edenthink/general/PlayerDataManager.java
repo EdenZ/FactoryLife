@@ -1,6 +1,7 @@
 package com.gmail.edenthink.general;
 
 import com.gmail.edenthink.FactoryLife;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class PlayerDataManager implements Listener {
     private final FactoryLife plugin;
-    private List<PlayerData> datas = new ArrayList<>();
+    private List<PlayerData> data = new ArrayList<>();
 
     public PlayerDataManager(FactoryLife plugin) {
         this.plugin = plugin;
@@ -24,6 +25,14 @@ public class PlayerDataManager implements Listener {
 
     private void dataSaveSchedule() {
 
+    }
+
+    public PlayerData getPlayerData(Player player) {
+        return null;
+    }
+
+    public List<PlayerData> getData() {
+        return data;
     }
 
     @EventHandler

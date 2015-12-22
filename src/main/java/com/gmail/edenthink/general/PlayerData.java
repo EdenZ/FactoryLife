@@ -7,8 +7,8 @@ import com.gmail.edenthink.tools.DataModel;
  */
 public class PlayerData implements DataModel {
     private String name;
-    private int mob_kill;
-    private int order_complete;
+    private int mob_kill = 0;
+    private int order_complete = 0;
 
     public String getName() {
         return name;
