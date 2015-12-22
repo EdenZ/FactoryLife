@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class Driver {
     private static Connection connection = null;
-    private static final String DATABASE_URI = "jdbc:sqlite:./plugins/FactoryLife/storage.db";
+    private static final String DATABASE_URI = "jdbc:sqlite:./plugins/FactoryLife/Data.db";
 
     /**
      * Connect to database

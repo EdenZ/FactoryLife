@@ -7,6 +7,8 @@ import com.gmail.edenthink.tools.DataModel;
  */
 public class PlayerData implements DataModel {
     private String name;
+    private int mob_kill;
+    private int order_complete;
 
     public String getName() {
         return name;
@@ -14,6 +16,22 @@ public class PlayerData implements DataModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getMob_kill() {
+        return mob_kill;
+    }
+
+    public void setMob_kill(int mob_kill) {
+        this.mob_kill = mob_kill;
+    }
+
+    public int getOrder_complete() {
+        return order_complete;
+    }
+
+    public void setOrder_complete(int order_complete) {
+        this.order_complete = order_complete;
     }
 
     @Override

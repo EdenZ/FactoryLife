@@ -60,6 +60,7 @@ public class FactoryLife extends JavaPlugin {
         saveDefaultConfig();
         langData = new DataAccess(this, getDataFolder().getAbsolutePath(), "lang.yml");
         langData.saveDefault();
+        saveResource("Data.db", false);
         //Enable main functions
     }
 

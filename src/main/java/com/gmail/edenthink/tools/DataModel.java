@@ -8,10 +8,10 @@ public interface DataModel {
     /**
      * Save this data to database
      */
-    public void save();
+    void save();
 
     /**
      * Reload data from database
      */
-    public void reload();
+    void reload();
 }

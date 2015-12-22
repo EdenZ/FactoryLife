@@ -19,6 +19,11 @@ public class PlayerDataManager implements Listener {
     public PlayerDataManager(FactoryLife plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        dataSaveSchedule();
+    }
+
+    private void dataSaveSchedule() {
+
     }
 
     @EventHandler
