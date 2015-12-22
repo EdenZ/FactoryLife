@@ -1,7 +1,5 @@
 package com.gmail.edenthink;
 
-import com.gmail.edenthink.general.LoginHelper;
-import com.gmail.edenthink.model.PlayerData;
 import com.gmail.edenthink.tools.DataAccess;
 import com.gmail.edenthink.tools.Driver;
 import net.milkbowl.vault.chat.Chat;
@@ -10,7 +8,6 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.persistence.PersistenceException;
 import java.util.logging.Logger;
 
 /**
@@ -59,19 +56,11 @@ public class FactoryLife extends JavaPlugin {
         }
         setupPermissions();
         setupChat();
-        //Just for database
-        try {
-            getDatabase().find(PlayerData.class).findRowCount();
-        } catch (PersistenceException ex) {
-            System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
-            installDDL();
-        }
         //For first setup
         saveDefaultConfig();
         langData = new DataAccess(this, getDataFolder().getAbsolutePath(), "lang.yml");
         langData.saveDefault();
         //Enable main functions
-        new LoginHelper(this);
     }
 
     private boolean setupEconomy() {
