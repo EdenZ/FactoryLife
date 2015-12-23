@@ -27,6 +27,10 @@ public class PlayerDataManager implements Listener {
 
     }
 
+    public void saveAllData() {
+
+    }
+
     public PlayerData getPlayerData(Player player) {
         return null;
     }

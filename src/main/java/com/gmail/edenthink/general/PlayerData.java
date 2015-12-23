@@ -5,6 +5,7 @@ import com.gmail.edenthink.tools.Driver;
 import com.gmail.edenthink.tools.Util;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -62,6 +63,19 @@ public class PlayerData implements DataModel {
 
     @Override
     public void reload() {
+        String query = "SELECT * FROM player_data WHERE \'name\' = ?;";
+        try (PreparedStatement statement= Driver.getConnection().prepareStatement(query)) {
+            statement.setString(1, name);
+            ResultSet set = statement.executeQuery();
+            if (set.next()) {
+                mob_kill = set.getInt("mob_kill");
+                order_complete = set.getInt("order_complete");
+            } else {
+                save();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
