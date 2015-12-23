@@ -19,4 +19,12 @@ public enum DailyOrder {
         this.items = items;
         this.reward = reward;
     }
+
+    public ItemStack[] getItems() {
+        return items;
+    }
+
+    public double getReward() {
+        return reward;
+    }
 }

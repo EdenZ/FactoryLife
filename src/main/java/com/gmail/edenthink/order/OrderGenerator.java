@@ -4,6 +4,7 @@ import com.gmail.edenthink.FactoryLife;
 
 /**
  * Created by Eden on 2015/12/22.
+ * Generate new order
  */
 public class OrderGenerator {
     private final FactoryLife plugin;

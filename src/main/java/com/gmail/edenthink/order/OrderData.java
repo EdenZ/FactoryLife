@@ -11,8 +11,17 @@ import java.util.List;
  */
 public class OrderData implements DataModel {
     private int id;
+    private OrderType type;
     private String receiver;
     private List<ItemStack> items;
+
+    public OrderType getType() {
+        return type;
+    }
+
+    public void setType(OrderType type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;
