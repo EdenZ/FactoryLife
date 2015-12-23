@@ -14,6 +14,9 @@ public class OrderGenerator {
     }
 
     public OrderData newDailyOrder(String receiver) {
-        return null;
+        OrderData data = new OrderData();
+        data.setType(OrderType.DAILY_ORDER);
+
+        return data;
     }
 }

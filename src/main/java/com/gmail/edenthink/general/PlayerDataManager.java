@@ -36,7 +36,7 @@ public class PlayerDataManager implements Listener {
     }
 
     @EventHandler
-    public void newPlayer(PlayerJoinEvent event) {
+    public void onJoin(PlayerJoinEvent event) {
 
     }
 
