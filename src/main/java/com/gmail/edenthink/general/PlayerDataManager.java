@@ -1,6 +1,7 @@
 package com.gmail.edenthink.general;
 
 import com.gmail.edenthink.FactoryLife;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,7 +28,7 @@ public class PlayerDataManager implements Listener {
      * Save all player data every 5 minutes
      */
     private void dataSaveSchedule() {
-
+        Bukkit.getScheduler().runTaskTimer(plugin, this::saveAllData, 0, 5 * 60 * 20);
     }
 
     /**
@@ -51,17 +52,16 @@ public class PlayerDataManager implements Listener {
         return null;
     }
 
-    public List<PlayerData> getData() {
-        return data;
-    }
-
     /**
      * Reload data from database
      * @param event Player join
      */
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-
+        PlayerData d = new PlayerData();
+        d.setName(event.getPlayer().getName());
+        d.reload();
+        data.add(d);
     }
 
     /**
@@ -70,6 +70,12 @@ public class PlayerDataManager implements Listener {
      */
     @EventHandler
     public void playerQuit(PlayerQuitEvent event) {
-
+        String name = event.getPlayer().getName();
+        for (PlayerData d : data) {
+            if (d.getName().equals(name)) {
+                d.save();
+                data.remove(d);
+            }
+        }
     }
 }
