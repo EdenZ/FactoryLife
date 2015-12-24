@@ -23,15 +23,31 @@ public class PlayerDataManager implements Listener {
         dataSaveSchedule();
     }
 
+    /**
+     * Save all player data every 5 minutes
+     */
     private void dataSaveSchedule() {
 
     }
 
+    /**
+     * Save all player date
+     */
     public void saveAllData() {
-
+        data.forEach(PlayerData::save);
     }
 
+    /**
+     * Get the player data by name
+     * @param player Online player
+     * @return player data. Null if not found
+     */
     public PlayerData getPlayerData(Player player) {
+        for (PlayerData d : data) {
+            if (player.getName().equals(d.getName())) {
+                return d;
+            }
+        }
         return null;
     }
 
@@ -39,11 +55,19 @@ public class PlayerDataManager implements Listener {
         return data;
     }
 
+    /**
+     * Reload data from database
+     * @param event Player join
+     */
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
 
     }
 
+    /**
+     * Save data when player quit and drop data form the list
+     * @param event Player quit
+     */
     @EventHandler
     public void playerQuit(PlayerQuitEvent event) {
 

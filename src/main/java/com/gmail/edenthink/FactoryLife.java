@@ -1,5 +1,6 @@
 package com.gmail.edenthink;
 
+import com.gmail.edenthink.general.PlayerDataManager;
 import com.gmail.edenthink.tools.DataAccess;
 import com.gmail.edenthink.tools.Driver;
 import net.milkbowl.vault.chat.Chat;
@@ -19,6 +20,7 @@ public class FactoryLife extends JavaPlugin {
     public static Permission perms = null;
     public static Chat chat = null;
     private DataAccess langData;
+    private PlayerDataManager playerDataManager;
 
     public DataAccess getLangData() {
         return langData;
@@ -42,6 +44,9 @@ public class FactoryLife extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        //Save data
+        playerDataManager.saveAllData();
+        //Disconnect database
         Driver.disconnect();
         log.info(String.format("[%s] Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
     }
@@ -62,6 +67,7 @@ public class FactoryLife extends JavaPlugin {
         langData.saveDefault();
         saveResource("Data.db", false);
         //Enable main functions
+        playerDataManager = new PlayerDataManager(this);
     }
 
     private boolean setupEconomy() {
