@@ -3,6 +3,8 @@ package com.gmail.edenthink.general;
 import com.gmail.edenthink.tools.DataModel;
 import com.gmail.edenthink.tools.Driver;
 import com.gmail.edenthink.tools.Util;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,8 +14,17 @@ import java.sql.SQLException;
  * For player data
  */
 public class PlayerData implements DataModel {
+    /**
+     * The name of player
+     */
     private String name;
+    /**
+     * Mob killed
+     */
     private int mob_kill = 0;
+    /**
+     * Order completed
+     */
     private int order_complete = 0;
 
     public String getName() {
@@ -38,6 +49,19 @@ public class PlayerData implements DataModel {
 
     public void setOrder_complete(int order_complete) {
         this.order_complete = order_complete;
+    }
+
+    /**
+     * Find the player instance from bukkit server
+     * @return The player instance. Null if the player does not exist or currently not online
+     */
+    public Player getPlayer() {
+        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+            if (player.getName().equals(name)) {
+                return player;
+            }
+        }
+        return null;
     }
 
     @Override
